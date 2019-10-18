@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5262935",
+      "name": "彩色-成功",
+      "font_class": "cs-cg-1",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "5262939",
+      "name": "彩色-失败",
+      "font_class": "cs-sb-1",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7870960",
+      "name": "警告",
+      "font_class": "jinggao",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    }
+  ]
+}
