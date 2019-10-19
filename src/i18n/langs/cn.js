@@ -93,6 +93,7 @@ const cn= {
 
   },
   financeEarnings:{
+    wallet:'钱包',
     title_1:'现金钱包',
     title_2:'动态钱包收益',
     title_3:'静态钱包收益',

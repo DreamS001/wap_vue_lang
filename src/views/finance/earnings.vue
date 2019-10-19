@@ -1,17 +1,17 @@
 <template>
   <div class="earnings-content">
-    <h5>钱包</h5>
+    <h5>{{$t('financeEarnings.title_1')}}</h5>
     <div class="earnings-item">
       <div class="item-top">
         <div class="top-left">
-          <span>现金钱包</span>
+          <span>{{$t('financeEarnings.title_1')}}</span>
           <img src="../../assets/images/img_jianbian.png" alt="">
         </div>
-        <div @click="hrefone" class="top-right">查看明细</div>
+        <div @click="hrefone" class="top-right">{{$t('financeEarnings.detailed')}}</div>
       </div>
       <div class="item-middel">
         <div class="item-m-p">
-          <span>当前余额</span>
+          <span>{{$t('financeEarnings.dq_balance')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.totalCash/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -21,21 +21,21 @@
         </div>
       </div>
       <div class="item-bottom">
-        <button class="earnings-btn" @click="goPresentation">提现</button>
-        <button class="earnings-btn" @click="goRecharge">充值</button>
+        <button class="earnings-btn" @click="goPresentation">{{$t('financeEarnings.withdrawal')}}</button>
+        <button class="earnings-btn" @click="goRecharge">{{$t('financeEarnings.recharge')}}</button>
       </div>
     </div>
     <div class="earnings-item">
       <div class="item-top">
         <div class="top-left">
-          <span>动态钱包收益</span>
+          <span>{{$t('financeEarnings.title_2')}}</span>
           <img src="../../assets/images/img_jianbian.png" alt="">
         </div>
-        <div @click="hrefthree" class="top-right">查看明细</div>
+        <div @click="hrefthree" class="top-right">{{$t('financeEarnings.detailed')}}</div>
       </div>
       <div class="item-middel">
         <div class="item-m-p">
-          <span>累计收益</span>
+          <span>{{$t('financeEarnings.lj_income')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.actCash/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="item-m-p">
-          <span>今日收益</span>
+          <span>{{$t('financeEarnings.jr_earnings')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.actCashDay/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -60,14 +60,14 @@
     <div class="earnings-item">
       <div class="item-top">
         <div class="top-left">
-          <span>静态钱包收益</span>
+          <span>{{$t('financeEarnings.title_3')}}</span>
           <img src="../../assets/images/img_jianbian.png" alt="">
         </div>
-        <div @click="hreftwo" class="top-right">查看明细</div>
+        <div @click="hreftwo" class="top-right">{{$t('financeEarnings.detailed')}}</div>
       </div>
       <div class="item-middel">
         <div class="item-m-p">
-          <span>累计收益</span>
+          <span>{{$t('financeEarnings.lj_income')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.staCash/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="item-m-p">
-          <span>今日收益</span>
+          <span>{{$t('financeEarnings.jr_earnings')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.staCashDay/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -92,14 +92,14 @@
     <div class="earnings-item">
       <div class="item-top">
         <div class="top-left">
-          <span>积分收益</span>
+          <span>{{$t('financeEarnings.title_4')}}</span>
           <img src="../../assets/images/img_jianbian.png" alt="">
         </div>
-        <div @click="hreffour" class="top-right">查看明细</div>
+        <div @click="hreffour" class="top-right">{{$t('financeEarnings.detailed')}}</div>
       </div>
       <div class="item-middel">
         <div class="item-m-p">
-          <span>累计积分收益</span>
+          <span>{{$t('financeEarnings.lj_integral')}}</span>
           <div class="item-m-box">
             <div class="item-m-l">
               <div class="middel-l" :style="{ width: cashData.creditPoint/1000 + 'px' }" style="background:rgba(255, 171, 79, 1)"></div>
@@ -113,47 +113,47 @@
     <!-- 弹窗 提现 -->
     <div class="popup" v-if="presentation">
       <div class="popup-content">
-        <h5>提现</h5>
+        <h5>{{$t('financeEarnings.withdrawal')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="popup-form">
           <div class="form-item">
-            <span class="item-title">邮箱：</span>
+            <span class="item-title">{{$t('financeEarnings.email')}}：</span>
             <div class="item-meddle">{{user.email}}</div>
             <button :disabled="isDisabled" class="code-btn" @click="getCode">{{buttonName}}</button>
           </div>
           <div class="form-item">
-            <span>验证码：</span>
+            <span>{{$t('financeEarnings.VerificationCode')}}：</span>
             <div>
               <input class="input-box" type="text" v-model="orderWithdraw.code" placeholder="请输入验证码">
             </div>
           </div>
           <div class="form-item">
-            <span>提现金额：</span>
+            <span>{{$t('financeEarnings.cash_amount')}}：</span>
             <div>
               <input class="input-box" type="text" v-model="orderWithdraw.amount" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入金额（提现额度不能大于总额）">
             </div>
           </div>
           <div class="form-item">
-            <span>提现地址：</span>
+            <span>{{$t('financeEarnings.cash_adress')}}：</span>
             <div>
               <input class="input-box" type="text" v-model="orderWithdraw.tokenId" placeholder="请输入提现地址">
             </div>
           </div>
           <div class="form-item">
-            <span>备注：</span>
+            <span>{{$t('financeEarnings.remarks')}}：</span>
             <div>
               <input class="input-box" type="text" v-model="orderWithdraw.remark" placeholder="请输入备注内容">
             </div>
           </div>
 
-          <button class="sure-btn" @click="surePresentation">确认</button>
+          <button class="sure-btn" @click="surePresentation">{{$t('financeEarnings.sure')}}</button>
         </div>
       </div>
     </div>
     <!-- 弹窗 充值 -->
     <div class="popup" v-if="recharge">
       <div class="popup-content">
-        <h5>充值</h5>
+        <h5>{{$t('financeEarnings.recharge')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="popup-form">
           <div class="recharge-box">
@@ -163,36 +163,36 @@
             </div>
           </div>
 
-          <button class="sure-btn" @click="sureBtn">确认</button>
+          <button class="sure-btn" @click="sureBtn">{{$t('financeEarnings.sure')}}</button>
         </div>
       </div>
     </div>
     <!-- 弹窗 充值 输入 -->
     <div class="popup" v-if="recharge2">
       <div class="popup-content">
-        <h5>充值</h5>
+        <h5>{{$t('financeEarnings.recharge')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="popup-form">
           <div class="form-item">
-            <span>充值金额：</span>
+            <span>{{$t('financeEarnings.recharge_amount')}}：</span>
             <div>
               <input class="input-box" type="text" oninput="value=value.replace(/[^\d]/g,'')" v-model="orderToup.amount" placeholder="请输入金额">
             </div>
           </div>
           <div class="form-item">
-            <span>交易单号：</span>
+            <span>{{$t('financeEarnings.jy_number')}}：</span>
             <div>
               <input class="input-box" type="text" v-model="orderToup.tokenId" placeholder="请输入交易单号">
             </div>
           </div>
           <div class="form-item">
-            <span>充值地址：</span>
+            <span>{{$t('financeEarnings.cash_adress')}}：</span>
             <div>
               {{orderToup.thirdId}}
             </div>
           </div>
 
-          <button class="sure-btn" @click="sureBtn1">确认</button>
+          <button class="sure-btn" @click="sureBtn1">{{$t('financeEarnings.sure')}}</button>
         </div>
       </div>
     </div>

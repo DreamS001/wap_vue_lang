@@ -16,7 +16,8 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
 
-import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
+import locale from 'element-ui/lib/locale/lang/en' // lang i18n 默认英文
 import i18n from './i18n/langs';
 
 

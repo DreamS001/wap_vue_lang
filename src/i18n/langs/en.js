@@ -85,6 +85,7 @@ const en = {
       creationdate:'Creation date',
     },
     financeEarnings:{
+      wallet:'Wallet',
       title_1:'Cash Wallet',
       title_2:'Dynamic wallet revenue',
       title_3:'Static wallet revenue',

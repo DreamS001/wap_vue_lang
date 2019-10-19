@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 const app = {
   state: {
     // 中英文
-    language: Cookies.get('language') || 'zh',
+    language: Cookies.get('language') || 'en',
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
