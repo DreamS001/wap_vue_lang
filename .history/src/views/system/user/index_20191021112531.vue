@@ -2,18 +2,18 @@
   <div class="p-box">
     <div class="search-box">
       <div class="date-box">
-        <span style="margin-right:0.05rem;width:1.1rem">
+        <span>
           <!-- 关键词： -->
           {{$t('systemes.keyword')}}
         </span>
         <div class="date-picker">
-          <div class="input-btn" style="width:100%">
-            <input type="text" style="width:100%;text-align:left" v-model="keyword" :placeholder="$t('systemes.enterkeywordsearch')">
+          <div class="input-btn">
+            <input type="text" v-model="keyword" :placeholder="$t('systemes.enterkeywordsearch')">
           </div>
         </div>
       </div>
       <div class="date-box">
-        <span style="width:0.8rem">
+        <span style="">
           <!-- 类型： -->
           {{$t('systemes.type')}}
           </span>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="date-box">
-        <span style="width:0.8rem">
+        <span>
           <!-- 状态： -->
           {{$t('systemes.status')}}
           </span>

@@ -5,7 +5,6 @@
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
           <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||item.meta.icon" :title="onlyOneChild.meta.title" />
         </el-menu-item>
-        <!-- {{generateTitle(item.children[0].meta.title)}} -->
       </app-link>
     </template>
 
@@ -41,10 +40,6 @@ import Item from './Item'
 import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
 
-import { generateTitle } from '@/utils/i18n'// 国际化主题名字
-
-import Cookies from 'js-cookie'
-var lang=Cookies.get('language') || 'en';
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
@@ -70,7 +65,6 @@ export default {
     }
   },
   methods: {
-    generateTitle,
     hasOneShowingChild(children, parent) {
       const showingChildren = children.filter(item => {
         console.log(item)
@@ -78,19 +72,7 @@ export default {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
-          if(lang=='en'){
-            if(item.meta.title=='首页'){
-              console.log(item.meta.title)
-              item.meta.title='Home'
-            }
-            this.onlyOneChild = item
-          }else{
-            if(item.meta.title=='首页'){
-              console.log(item.meta.title)
-              item.meta.title='首页'
-            }
-            this.onlyOneChild = item
-          }
+          this.onlyOneChild = item
           return true
         }
       })

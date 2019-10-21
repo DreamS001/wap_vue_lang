@@ -31,7 +31,7 @@
                           </div>
                         <div class="middle-m">
                           <div class="middle-m-d" :style="{width:dataTable.deviceNum/75 +'rem'}" style="background:rgba(255, 171, 79, 1);"></div>
-                          <div class="middle-right">{{earn.deviceNum}}{{$t('navbar.platform')}}</div>
+                          <div class="middle-right">{{earn.deviceNum}}台</div>
                         </div>
 
                       </div>
@@ -120,7 +120,7 @@
                           </div>
                         <div class="middle-m">
                           <div class="middle-m-d" :style="{width:dataTable.teamNum/75 +'rem'}" style="background:rgba(255, 171, 79, 1);"></div>
-                          <div class="middle-right">{{earn.teamNum}}{{$t('navbar.person')}}</div>
+                          <div class="middle-right">{{earn.teamNum}}人</div>
                         </div>
 
                       </div>

@@ -8,7 +8,7 @@
         </span>
         <div class="date-picker">
           <div class="input-btn" style="width:100%">
-            <input type="text" style="width:100%;text-align:left" v-model="keyword" :placeholder="$t('systemes.enterkeywordsearch')">
+            <input type="text" style="width:100%" v-model="keyword" :placeholder="$t('systemes.enterkeywordsearch')">
           </div>
         </div>
       </div>

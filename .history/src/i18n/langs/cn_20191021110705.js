@@ -9,16 +9,6 @@
 // export default cn;
 
 const cn= {
-  //登录
-  login:{
-    placeholder_username:'请输入账户',
-    placeholder_password:'请输入密码',
-    VerificationCode:'请输入验证码',
-    login:'登录',
-    desc_word:'登录即同意',
-    xieyi:'《注册协议》',
-    xyxieyi:'《信用授权协议》',
-  },
   // 导航栏
   navbar: {
     // 顶部导航栏
@@ -126,17 +116,12 @@ const cn= {
     remarks:'备注',
     jy_number:'交易单号',
     VerificationCode:'验证码',
-    no_more:'不能大于总额度',
-    input_pl_1:'请输入金额（提现额度不能大于总额）',
-    input_pl_2:'请输入提现地址',
-    input_pl_3:'请输入备注内容',
-    input_pl_4:'请输入交易单号',
+    no_more:'不能大于总额度'
   },
   financeCash:{
     title_2:'动态钱包收益（$）',
     title_3:'静态钱包收益（$）',
-    customQuery:'自定义',
-    rest:'重置',
+    customQuery:'自定义查询',
     recharge_amount:'充值金额（$）',
     withdrawal_amount:'提现金额（$）',
     query:'查询',
@@ -152,10 +137,6 @@ const cn= {
     original_integral:'原有积分',
     integral_growth:'积分增长',
     existing_integral:'现有积分',
-    more:'更多',
-    place_date:'请选择日期',
-    ID:'交易ID',
-    wallet_adress:'钱包地址',
 
     serial_number :'流水号',
     recharge_date:'充值日期',
@@ -169,56 +150,8 @@ const cn= {
     adopt:'通过',
     reject:'驳回',
     reasons_for_remarks:'备注理由',
-    
-    name:'名称',
-    device_number:'设备号',
-    transaction_amount:'交易金额（$）',
-    trading_status:'交易状态',
-    not_submitted:'未提交',
-    successful_trade:'交易成功',
-    refund_completed:'退款完成',
-    order_cancelled:'订单已撤销',
-    unknown_state:'未知状态',
-
-
-    membership_number:'会员编号',
-    member_name:'会员名称',
-    member:'会员',
-    contact_information:'联系方式',
-    investment_amount:'投资金额（$）',
-    current_balance:'当前余额（$）',
-    team_number:'团队人数（人）',
-
-    user_name:'用户名称',
-    account_level:'账户等级',
-    phone_number:'手机号码',
-    user_email:'用户邮箱',
-    subordinate_departments:'所属部门',
-    date_of_creation:'创建日期',
-    security_setting:'安全设置',
-    change_password:'修改密码',
-    modify_mailbox:'修改邮箱',
-    old_password:'旧密码',
-    new_password:'新密码',
-    confirm_password:'确认密码',
-    place_old:'请输入旧密码',
-    place_new:'请输入新密码',
-    place_new_again:'请再次输入新密码',
-    place_email_new:'请输入新的邮箱',
-    place_pass:'请输入密码',
-
-    level_description:'等级说明',
-    ordinary_member:'普通会员',
-    gold_member:'黄金会员',
-    platinum_members:'铂金会员',
-    diamond_member:'钻石会员',
-
   },
 
-  route:{
-    home:'首页'
-  }
-  
 }
 
 export default cn;
