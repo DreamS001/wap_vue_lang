@@ -2,7 +2,7 @@
   <div class="team-box">
     <div class="team-tree">
       <div class="tree-content">
-        <div class="backBtn" @click="restBtn">重置</div>
+        <div class="backBtn" @click="restBtn">{{$t('financeCash.rest')}}</div>
         <div class="first-level public-box" @click="clickQuery(depts)">
           <img class="user-img" src="../../assets/images/img_team_tx.png" alt="">
           <div class="user-name">{{depts.username}}</div>
@@ -63,20 +63,20 @@
     <div class="team-form">
       <div class="search-box">
         <div class="date-box">
-          <span>自定义：</span>
+          <span>{{$t('financeCash.customQuery')}}：</span>
           <div class="date-picker">
             <div class="input-btn" @click="selectbeginDate">
-              <input type="text" readonly v-model="beginDate" placeholder="请选择日期">
+              <input type="text" readonly v-model="beginDate" :placeholder="$t('financeCash.place_date')">
             </div>
-            <span style="text-align:center;">至</span>
+            <span style="text-align:center;">-</span>
             <div class="input-btn" @click="selectendDate">
-              <input type="text" readonly v-model="endDate" placeholder="请选择日期">
+              <input type="text" readonly v-model="endDate" :placeholder="$t('financeCash.place_date')">
             </div>
           </div>
-          <div class="rest-btn" @click="restBtn2">重置</div>
+          <div class="rest-btn" @click="restBtn2">{{$t('financeCash.rest')}}</div>
         </div>
         <div class="date-box">
-          <span>会员编号：</span>
+          <span>{{$t('financeCash.membership_number')}}：</span>
           <div class="date-picker">
             <div class="" style="width:100%">
               <input type="text" style="width:100%" v-model="memberNum" placeholder="">
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="date-box">
-          <span>会员编号：</span>
+          <span>{{$t('financeCash.member_name')}}：</span>
           <div class="date-picker">
             <div class="" style="width:100%">
               <input type="text" style="width:100%" v-model="account" placeholder="">
@@ -92,59 +92,59 @@
           </div>
         </div>
         <div class="date-box">
-          <span>联系方式：</span>
+          <span>{{$t('financeCash.contact_information')}}：</span>
           <div class="date-picker">
             <div class="" style="width:100%">
               <input type="text" style="width:100%" v-model="contact" placeholder="">
             </div>
           </div>
-          <div class="search-btn" @click="searchData">查询</div>
+          <div class="search-btn" @click="searchData">{{$t('financeCash.query')}}</div>
         </div>
       </div>
       <div class="data-box">
         <div style="width:100%!important;margin-top:20px">
           <el-table :data="userData" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-            <el-table-column :show-overflow-tooltip="true" prop="createTime" label="日期" min-width="160" align="center">
+            <el-table-column :show-overflow-tooltip="true" prop="createTime" :label="$t('financeCash.date')" min-width="160" align="center">
               <template slot-scope="scope">
                 <span>{{ parseTime(scope.row.create_time) }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="会员编号" align="center" min-width="160">
+            <el-table-column :label="$t('financeCash.membership_number')" align="center" min-width="160">
               <template slot-scope="scope">
                 <div>{{ scope.row.id}}</div>
               </template>
             </el-table-column>
-            <el-table-column prop="username" label="会员名称" align="center" min-width="160"/>
-            <el-table-column prop="phone" label="联系方式" align="center" min-width="160"/>
-            <el-table-column label="邮箱" align="center" min-width="160">
+            <el-table-column prop="username" :label="$t('financeCash.member_name')" align="center" min-width="160"/>
+            <el-table-column prop="phone" :label="$t('financeCash.contact_information')" align="center" min-width="160"/>
+            <el-table-column :label="$t('financeEarnings.email')" align="center" min-width="160">
               <template slot-scope="scope">
                 <div>{{ scope.row.email }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="投资金额（$）" align="center" min-width="160">
+            <el-table-column :label="$t('financeCash.investment_amount')" align="center" min-width="160">
               <template slot-scope="scope">
                 <div>{{ scope.row.total_amount }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="当前余额（$）" align="center" min-width="160">
+            <el-table-column :label="$t('financeCash.current_balance')" align="center" min-width="160">
               <template slot-scope="scope">
                 <div>{{ scope.row.cash_amount }}</div>
               </template>
             </el-table-column>
-            <el-table-column label="操作" width="260" align="center" min-width="160">
+            <el-table-column :label="$t('financeCash.operation')" width="260" align="center" min-width="160">
               <template slot-scope="scope">
-                <div class="ck-btn" size="mini" @click="reveal(scope.$index, scope.row)">查看详情</div>
+                <div class="ck-btn" size="mini" @click="reveal(scope.$index, scope.row)">{{$t('financeEarnings.detailed')}}</div>
               </template>
             </el-table-column>
           </el-table>
         </div>
-        <button class="more-btn" @click="getMore">更多</button>
+        <button class="more-btn" @click="getMore">{{$t('financeCash.more')}}</button>
       </div>
     </div>
 
     <div class="popup" v-if="FC">
       <div class="popup-content">
-        <h5>查看详情</h5>
+        <h5>{{$t('financeEarnings.detailed')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="table-box">
           <el-table
@@ -155,10 +155,10 @@
             height="350"
             :row-class-name="setClassName"
           >
-            <el-table-column prop="username" label="会员" min-width="150" align="center"/>
-            <el-table-column prop="id" label="会员编号" min-width="180" align="center"/>
-            <el-table-column prop="amount" label="投资金额（$）" min-width="170" align="center"/>
-            <el-table-column prop="num" label="团队人数（人）" align="center" min-width="180"></el-table-column>
+            <el-table-column prop="username" :label="$t('financeCash.member')" min-width="150" align="center"/>
+            <el-table-column prop="id" :label="$t('financeCash.membership_number')" min-width="180" align="center"/>
+            <el-table-column prop="amount" :label="$t('financeCash.investment_amount')" min-width="170" align="center"/>
+            <el-table-column prop="num" :label="$t('financeCash.team_number')" align="center" min-width="180"></el-table-column>
           </el-table>
         </div>
         <!-- <button class="more-btn" @click="getMoreDetail">更多</button> -->
@@ -182,6 +182,10 @@ import { formatDate } from '../../utils/date.js'
 import { Toast } from 'mint-ui';
 import { getUserList } from '@/api/data'
 import { persAll,detail } from "@/api/team";
+import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   mixins: [initData, initDict],
   data(){
@@ -328,21 +332,40 @@ export default {
     },
     searchData(){
       this.pageNo=1
-      if(this.beginDate !='' &&this.endDate==''){
-        Toast({
-          message: '请选择结束时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
-      }
-      if(this.beginDate =='' &&this.endDate !=''){
-        Toast({
-          message: '请选择开始时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: 'Please select the end time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: 'Please select a start time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: '请选择结束时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: '请选择开始时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.id=this.memberNum
       this.name=this.account
@@ -420,11 +443,19 @@ export default {
         //   message: "没有更多了",
         //   type: "none"
         // });
-        Toast({
-          message: '没有更多了',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+        if(lang=='en'){
+            Toast({
+              message: 'No more',
+              duration: 3000,
+              iconClass: 'iconfont icon-jinggao'
+            });
+        }else{
+          Toast({
+            message: '没有更多了',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
         return false
       }
       // this.request();
@@ -715,13 +746,15 @@ export default {
     text-align: center;
   }
   .team-form .search-box .search-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -729,13 +762,15 @@ export default {
   }
   
   .rest-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     right: 0;
     top: 50%;

@@ -2,41 +2,41 @@
   <div class="p-box">
     <div class="search-box">
       <div class="date-box">
-        <span>自定义：</span>
+        <span>{{$t('financeCash.customQuery')}}：</span>
         <div class="date-picker">
           <div class="input-btn" @click="selectbeginDate">
-            <input type="text" readonly v-model="beginDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="beginDate" :placeholder="$t('financeCash.place_date')">
           </div>
-          <span>至</span>
+          <span>-</span>
           <div class="input-btn" @click="selectendDate">
-            <input type="text" readonly v-model="endDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="endDate" :placeholder="$t('financeCash.place_date')">
           </div>
         </div>
       </div>
-      <div class="rest-btn" @click="restBtn">重置</div>
-      <div class="search-btn" @click="searchData">查询</div>
+      <div class="rest-btn" @click="restBtn">{{$t('financeCash.rest')}}</div>
+      <div class="search-btn" @click="searchData">{{$t('financeCash.query')}}</div>
     </div>
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
         <el-table :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-          <el-table-column prop="date" label="日期" min-width="180" align="center"/>
-          <el-table-column style="color:red" prop="act_profit" label="动态钱包收益（$）" min-width="160" align="center"/>
-          <el-table-column style="color:red" prop="device_expend" label="购买机器人支出（$）" min-width="160" align="center"/>
-          <el-table-column style="color:red" prop="cash_withdraw" label="提现支出（$）" min-width="150" align="center"/>
-          <el-table-column label="操作" min-width="150" align="center">
+          <el-table-column prop="date" :label="$t('financeCash.date')" min-width="180" align="center"/>
+          <el-table-column style="color:red" prop="act_profit" :label="$t('financeCash.title_2')" min-width="160" align="center"/>
+          <el-table-column style="color:red" prop="device_expend" :label="$t('financeCash.robot_ex')" min-width="160" align="center"/>
+          <el-table-column style="color:red" prop="cash_withdraw" :label="$t('financeCash.cash_with')" min-width="150" align="center"/>
+          <el-table-column :label="$t('financeCash.operation')" min-width="150" align="center">
             <template slot-scope="scope">
-              <div class="ck-btn" @click="reveal(scope.$index, scope.row)">查看详情</div>
+              <div class="ck-btn" @click="reveal(scope.$index, scope.row)">{{$t('financeEarnings.detailed')}}</div>
             </template>
           </el-table-column>
         </el-table>
       </div>
 
-      <button class="more-btn" @click="getMore">更多</button>
+      <button class="more-btn" @click="getMore">{{$t('financeCash.more')}}</button>
     </div>
 
     <div class="popup" v-if="FC">
       <div class="popup-content">
-        <h5>查看详情</h5>
+        <h5>{{$t('financeEarnings.detailed')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="table-box">
           <el-table
@@ -47,11 +47,11 @@
             height="270"
             :row-class-name="setClassName"
           >
-            <el-table-column prop="date" label="日期" min-width="100" align="center"/>
-            <el-table-column prop="act_profit" label="动态钱包收益（$）" min-width="160" align="center"/>
-            <el-table-column prop="device_expend" label="购买机器人支出（$）" min-width="170" align="center"/>
-            <el-table-column prop="cash_withdraw" label="提现支出（$）" min-width="170" align="center"/>
-            <el-table-column prop="ex_info" label="类型" min-width="180" align="center"></el-table-column>
+            <el-table-column prop="date" :label="$t('financeCash.date')" min-width="100" align="center"/>
+            <el-table-column prop="act_profit" :label="$t('financeCash.title_2')" min-width="160" align="center"/>
+            <el-table-column prop="device_expend" :label="$t('financeCash.robot_ex')" min-width="170" align="center"/>
+            <el-table-column prop="cash_withdraw" :label="$t('financeCash.cash_with')" min-width="170" align="center"/>
+            <el-table-column prop="ex_info" :label="$t('financeCash.type')" min-width="180" align="center"></el-table-column>
           </el-table>
         </div>
         <!-- <button class="more-btn" @click="getMoreDetail">更多</button> -->
@@ -65,6 +65,10 @@ import '../../utils/screen'
 import { cash, cashlist, cashquery } from '@/api/finance'
 import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
+import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -113,21 +117,40 @@ export default {
     },
     searchData(){
       this.pageNo=1
-      if(this.beginDate !='' &&this.endDate==''){
-        Toast({
-          message: '请选择结束时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
-      }
-      if(this.beginDate =='' &&this.endDate !=''){
-        Toast({
-          message: '请选择开始时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: 'Please select the end time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: 'Please select a start time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: '请选择结束时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: '请选择开始时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.list=[]
       this.request();
@@ -159,11 +182,19 @@ export default {
         //   message: "没有更多了",
         //   type: "none"
         // });
-        Toast({
-          message: '没有更多了',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+        if(lang=='en'){
+            Toast({
+              message: 'No more',
+              duration: 3000,
+              iconClass: 'iconfont icon-jinggao'
+            });
+        }else{
+          Toast({
+            message: '没有更多了',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
         return false
       }
       this.request();
@@ -275,21 +306,25 @@ export default {
     text-align: center;
   }
   .p-box .search-box .search-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
     color: rgba(43, 250, 255, 1);
   }
   .p-box .search-box .rest-btn{
-    width: 58px;
+    /* width: 58px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
     color: rgba(43, 250, 255, 1);
   }
   .more-btn,.ck-btn{
@@ -389,8 +424,8 @@ export default {
   }
   .el-table th>.cell{
     font-size: 24px !important;
-    line-height: 100% !important;
-    line-height: 80px !important;
+    /* line-height: 100% !important; */
+    /* line-height: 80px !important; */
     display: flex;
     justify-content: center;
     align-items: center;

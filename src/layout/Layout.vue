@@ -44,7 +44,7 @@ export default {
       getPath(){
         this.isShowSideBar=false
         // console.log(this.$route.path);
-        this.$router.go(0);
+        // this.$router.go(0);
       },
       closeBtn(){
         this.isShowSideBar=false

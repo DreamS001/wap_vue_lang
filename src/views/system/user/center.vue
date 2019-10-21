@@ -13,33 +13,40 @@
             <img v-if="user.avatar" :src="user.avatar" title="点击上传头像" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"/>
           </el-upload>
+          <span class="level-box">V1</span>
         </div>
       </div>
       <div class="item">
-        <div class="p-item item-left">用户名称</div>
+        <div class="p-item item-left">{{$t('financeCash.user_name')}}</div>
         <div class="p-item item-right">{{ user.username }}</div>
       </div>
       <div class="item">
-        <div class="p-item item-left">手机号码</div>
+        <div class="p-item item-left">{{$t('financeCash.account_level')}}</div>
+        <div class="p-item item-right level" @click="showLevel">
+          V1
+        </div>
+      </div>
+      <div class="item">
+        <div class="p-item item-left">{{$t('financeCash.phone_number')}}</div>
         <div class="p-item item-right">{{ user.phone }}</div>
       </div>
       <div class="item">
-        <div class="p-item item-left">用户邮箱</div>
+        <div class="p-item item-left">{{$t('financeCash.user_email')}}</div>
         <div class="p-item item-right">{{ user.email }}</div>
       </div>
       <div class="item">
-        <div class="p-item item-left">所属部门</div>
+        <div class="p-item item-left">{{$t('financeCash.subordinate_departments')}}</div>
         <div class="p-item item-right">{{ user.dept }} / {{ user.job }}</div>
       </div>
       <div class="item">
-        <div class="p-item item-left">创建日期</div>
+        <div class="p-item item-left">{{$t('financeCash.date_of_creation')}}</div>
         <div class="p-item item-right">{{ parseTime(user.createTime) }}</div>
       </div>
       <div class="item">
-        <div class="p-item item-left">安全设置</div>
+        <div class="p-item item-left">{{$t('financeCash.security_setting')}}</div>
         <div class="p-item item-right" style="color:rgba(43, 250, 255, 1)">
-          <span @click="modifyPassword">修改密码</span>
-          <span @click="modifyEmail">修改邮箱</span>
+          <span @click="modifyPassword">{{$t('financeCash.change_password')}}</span>
+          <span @click="modifyEmail">{{$t('financeCash.modify_mailbox')}}</span>
         </div>
       </div>
     </div>
@@ -47,60 +54,78 @@
     <!-- 修改密码 -->
     <div class="modifyPopup" v-if="recharge">
       <div class="modify-content">
-        <h5>修改密码</h5>
+        <h5>{{$t('financeCash.change_password')}}</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="popup-form">
           <div class="form-item">
-            <span>旧密码：</span>
+            <span>{{$t('financeCash.old_password')}}：</span>
             <div>
-              <input class="input-box" type="password" v-model="form.oldPass" placeholder="请输入旧密码">
+              <input class="input-box" type="password" v-model="form.oldPass" :placeholder="$t('financeCash.place_old')">
             </div>
           </div>
           <div class="form-item">
-            <span>新密码：</span>
+            <span>{{$t('financeCash.new_password')}}：</span>
             <div>
-              <input class="input-box" type="password" v-model="form.newPass" placeholder="请输入新密码">
+              <input class="input-box" type="password" v-model="form.newPass" :placeholder="$t('financeCash.place_new')">
             </div>
           </div>
           <div class="form-item">
-            <span>确认密码：</span>
+            <span>{{$t('financeCash.confirm_password')}}：</span>
             <div>
-              <input class="input-box" type="password" v-model="form.confirmPass" placeholder="请再次输入新密码">
+              <input class="input-box" type="password" v-model="form.confirmPass" :placeholder="$t('financeCash.place_new_again')">
             </div>
           </div>
         </div>
         <div class="btn-group">
-          <button class="sure-btn" @click="closePopup">取消</button>
-          <button class="sure-btn" @click="sureBtn">确认</button>
+          <button class="sure-btn" @click="closePopup">{{$t('financeEarnings.cancel')}}</button>
+          <button class="sure-btn" @click="sureBtn">{{$t('financeEarnings.sure')}}</button>
         </div>
       </div>
     </div>
     <!-- 修改邮箱 -->
     <div class="modifyPopup" v-if="emailPopup">
       <div class="modify-content">
-        <h5>修改邮箱</h5>
+        <h5>{{$t('financeCash.modify_mailbox')}}</h5>
         <div class="close-icon" @click="cancelPopup"></div>
         <div class="popup-form">
           <div class="form-item">
             <div class="modify-email">
-              <input class="input-box" type="email" v-model="formEmail.email" placeholder="请输入新的邮箱">
+              <input class="input-box" type="email" v-model="formEmail.email" :placeholder="$t('financeCash.place_email_new')">
             </div>
           </div>
           <div class="form-item">
             <div class="modify-email">
-              <input class="input-box" style="width:65%;" type="text" v-model="formEmail.code" placeholder="请输入验证码">
+              <input class="input-box" style="width:65%;" type="text" v-model="formEmail.code" :placeholder="$t('login.VerificationCode')">
               <button class="code-btn" :disabled="isDisabled" @click="sendCode">{{ buttonName }}</button>
             </div>
           </div>
           <div class="form-item">
             <div class="modify-email">
-              <input class="input-box" type="password" v-model="formEmail.pass" placeholder="请输入密码">
+              <input class="input-box" type="password" v-model="formEmail.pass" :placeholder="$t('financeCash.place_pass')">
             </div>
           </div>
         </div>
         <div class="btn-group">
-          <button class="sure-btn" @click="cancelPopup">取消</button>
-          <button class="sure-btn" @click="sureBtnEmail">确认</button>
+          <button class="sure-btn" @click="cancelPopup">{{$t('financeEarnings.cancel')}}</button>
+          <button class="sure-btn" @click="sureBtnEmail">{{$t('financeEarnings.sure')}}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 等级说明 -->
+    <div class="modifyPopup" v-if="levelPopup">
+      <div class="modify-content">
+        <h5>{{$t('financeCash.level_description')}}</h5>
+        <div class="close-icon" @click="closeLevel"></div>
+
+        <div class="level-content">
+          <div class="level-item" v-for="(i,index) in levelList" :key="index">
+            <span class="level-left" :style="{color:i.color,borderColor:i.color}">{{i.level}}</span>
+            <span class="level-middel"></span>
+            <span class="level-right">{{i.name}}</span>
+          </div>
+
+          <button class="level-btn" @click="closeLevel">确认</button>
         </div>
       </div>
     </div>
@@ -117,6 +142,10 @@ import initData from '@/mixins/initData'
 import { updatePass,updateEmail } from '@/api/user'
 import { validatEmail } from '@/utils/validate'
 import { resetEmail } from '@/api/code'
+import { financeEarnings,financeCash,login } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -126,14 +155,17 @@ export default {
       imageUrl:'',
       recharge:false,
       emailPopup:false,
+      levelPopup:false,
       form: { oldPass: '', newPass: '', confirmPass: '' },
       formEmail: { pass: '', email: '', code: '' },
-      buttonName: '获取验证码', 
+      // buttonName: '获取验证码', 
+      buttonName:'Get verification code',
       isDisabled: false, 
       time: 60,
       email:'',
       codeData: { type: 'email', value: '' },
       emailData: { email: '', password: '' },
+      levelList:[{name:'普通会员',level:'V0',color:'#00FFFF'},{name:'黄金会员',level:'V1',color:'#FEFA24'},{name:'铂金会员',level:'V2',color:'#D3D4D5'},{name:'钻石会员',level:'V3',color:'#D5A6F9'}]
     }
   },
   computed: {
@@ -146,15 +178,30 @@ export default {
     store.dispatch('GetInfo').then(() => {})
        console.log(this.user.avatar);
        this.email=this.user.email
+    if(lang=='en'){
+      this.buttonName='Get verification code'
+      this.levelList=[{name:'Ordinary member',level:'V0',color:'#00FFFF'},{name:'Gold member',level:'V1',color:'#FEFA24'},{name:'Platinum members',level:'V2',color:'#D3D4D5'},{name:'Diamond member',level:'V3',color:'#D5A6F9'}]
+    }else{
+      this.buttonName='获取验证码'
+      this.levelList=[{name:'普通会员',level:'V0',color:'#00FFFF'},{name:'黄金会员',level:'V1',color:'#FEFA24'},{name:'铂金会员',level:'V2',color:'#D3D4D5'},{name:'钻石会员',level:'V3',color:'#D5A6F9'}]
+    }
   },
   methods: {
     parseTime,
     handleSuccess(response, file, fileList) {
-      this.$notify({
-        title: '头像修改成功',
-        type: 'success',
-        duration: 2500
-      })
+      if(lang=='en'){
+        this.$notify({
+          title: 'Successfully modified the Avatar',
+          type: 'success',
+          duration: 2500
+        })
+      }else{
+        this.$notify({
+          title: '头像修改成功',
+          type: 'success',
+          duration: 2500
+        })
+      }
       store.dispatch('GetInfo').then(() => {})
     },
     // 监听上传失败
@@ -173,143 +220,283 @@ export default {
     modifyEmail(){
       this.emailPopup=true;
     },
+    showLevel(){
+      this.levelPopup=true;
+    },
     //确认修改密码
     sureBtn(){
       var reg=/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
-      if(this.form.oldPass==''){
-        this.$notify({
-          title: '请输入旧密码',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.form.newPass==''){
-        this.$notify({
-          title: '请输入新密码',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(!reg.test(this.form.newPass)){
-        this.$notify({
-          title: '密码至少6位，且需为字母数字混合',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.form.confirmPass==''){
-        this.$notify({
-          title: '请再次输入新密码',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.form.newPass!==this.form.confirmPass){
-        this.$notify({
-          title: '两次输入密码不一致',
-          type: 'error',
-          duration: 2500
-        })
-      }else{
-        updatePass(this.form).then(res => {
+      if(lang=='en'){
+          if(this.form.oldPass==''){
           this.$notify({
-            title: '密码修改成功，请重新登录',
-            type: 'success',
-            duration: 1500
+            title: 'Please enter the old password',
+            type: 'error',
+            duration: 2500
           })
-          this.recharge=false;
-          setTimeout(() => {
-            store.dispatch('LogOut').then(() => {
-              location.reload() // 为了重新实例化vue-router对象 避免bug
+        }else if(this.form.newPass==''){
+          this.$notify({
+            title: 'Please enter a new password',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(!reg.test(this.form.newPass)){
+          this.$notify({
+            title: 'Password shall be at least 6 digits, and shall be alphanumeric',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.form.confirmPass==''){
+          this.$notify({
+            title: 'Please enter the new password again',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.form.newPass!==this.form.confirmPass){
+          this.$notify({
+            title: 'The two passwords are inconsistent',
+            type: 'error',
+            duration: 2500
+          })
+        }else{
+          updatePass(this.form).then(res => {
+            this.$notify({
+              title: '密码修改成功，请重新登录',
+              type: 'success',
+              duration: 1500
             })
-          }, 1500)
-        }).catch(err => {
-          console.log(err.response.data.message)
-        })
+            this.recharge=false;
+            setTimeout(() => {
+              store.dispatch('LogOut').then(() => {
+                location.reload() // 为了重新实例化vue-router对象 避免bug
+              })
+            }, 1500)
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }
+      }else{
+        if(this.form.oldPass==''){
+          this.$notify({
+            title: '请输入旧密码',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.form.newPass==''){
+          this.$notify({
+            title: '请输入新密码',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(!reg.test(this.form.newPass)){
+          this.$notify({
+            title: '密码至少6位，且需为字母数字混合',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.form.confirmPass==''){
+          this.$notify({
+            title: '请再次输入新密码',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.form.newPass!==this.form.confirmPass){
+          this.$notify({
+            title: '两次输入密码不一致',
+            type: 'error',
+            duration: 2500
+          })
+        }else{
+          updatePass(this.form).then(res => {
+            this.$notify({
+              title: '密码修改成功，请重新登录',
+              type: 'success',
+              duration: 1500
+            })
+            this.recharge=false;
+            setTimeout(() => {
+              store.dispatch('LogOut').then(() => {
+                location.reload() // 为了重新实例化vue-router对象 避免bug
+              })
+            }, 1500)
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }
       }
     },
     sendCode() {
       var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-      if(!myreg.test(this.formEmail.email)){
-        this.$notify({
-          title: '邮箱格式不正确',
-          type: 'error',
-          duration: 2500
-        })
-      }else if (this.formEmail.email && this.formEmail.email !== this.email) {
-        this.buttonName = '验证码发送中'
-        this.codeData.value = this.formEmail.email
-        const _this = this
-        resetEmail(this.codeData).then(res => {
-          this.$message({
-            showClose: true,
-            message: '发送成功，验证码有效期5分钟',
-            type: 'success'
+      if(lang=='en'){
+           if(!myreg.test(this.formEmail.email)){
+          this.$notify({
+            title: 'Incorrect mailbox format',
+            type: 'error',
+            duration: 2500
           })
-          this.isDisabled = true
-          this.buttonName = this.time-- + '秒后重新发送'
-          this.timer = window.setInterval(function() {
-            _this.buttonName = _this.time + '秒后重新发送'
-            --_this.time
-            if (_this.time < 0) {
-              _this.buttonName = '重新发送'
-              _this.time = 60
-              _this.isDisabled = false
-              window.clearInterval(_this.timer)
-            }
-          }, 1000)
-        }).catch(err => {
-          console.log(err.response.data.message)
-        })
+        }else if (this.formEmail.email && this.formEmail.email !== this.email) {
+          this.buttonName = 'Verification code sending'
+          this.codeData.value = this.formEmail.email
+          const _this = this
+          resetEmail(this.codeData).then(res => {
+            this.$message({
+              showClose: true,
+              message: 'Send successfully, validation code valid for 5 minutes',
+              type: 'success'
+            })
+            this.isDisabled = true
+            this.buttonName = this.time-- + 'Resend in seconds'
+            this.timer = window.setInterval(function() {
+              _this.buttonName = _this.time + 'Resend in seconds'
+              --_this.time
+              if (_this.time < 0) {
+                _this.buttonName = 'Resend'
+                _this.time = 60
+                _this.isDisabled = false
+                window.clearInterval(_this.timer)
+              }
+            }, 1000)
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }else{
+          this.$notify({
+            title: 'Please enter a new email',
+            type: 'error',
+            duration: 2500
+          })
+        }
       }else{
-        this.$notify({
-          title: '请输入新邮箱',
-          type: 'error',
-          duration: 2500
-        })
+        if(!myreg.test(this.formEmail.email)){
+          this.$notify({
+            title: '邮箱格式不正确',
+            type: 'error',
+            duration: 2500
+          })
+        }else if (this.formEmail.email && this.formEmail.email !== this.email) {
+          this.buttonName = '验证码发送中'
+          this.codeData.value = this.formEmail.email
+          const _this = this
+          resetEmail(this.codeData).then(res => {
+            this.$message({
+              showClose: true,
+              message: '发送成功，验证码有效期5分钟',
+              type: 'success'
+            })
+            this.isDisabled = true
+            this.buttonName = this.time-- + '秒后重新发送'
+            this.timer = window.setInterval(function() {
+              _this.buttonName = _this.time + '秒后重新发送'
+              --_this.time
+              if (_this.time < 0) {
+                _this.buttonName = '重新发送'
+                _this.time = 60
+                _this.isDisabled = false
+                window.clearInterval(_this.timer)
+              }
+            }, 1000)
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }else{
+          this.$notify({
+            title: '请输入新邮箱',
+            type: 'error',
+            duration: 2500
+          })
+        }
       }
     },
     sureBtnEmail(){
-      
-      if(this.formEmail.email==''){
-        this.$notify({
-          title: '请输入邮箱',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.formEmail.code===this.email){
-        this.$notify({
-          title: '新邮箱不能与旧邮箱相同',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.formEmail.code==''){
-        this.$notify({
-          title: '请输入验证码',
-          type: 'error',
-          duration: 2500
-        })
-      }else if(this.formEmail.pass==''){
-        this.$notify({
-          title: '请输入密码',
-          type: 'error',
-          duration: 2500
-        })
-      }else{
-        this.emailData = { email: this.formEmail.email, password: this.formEmail.pass }
-        console.log(this.emailData)
-        updateEmail(this.formEmail.code, this.emailData).then(res => {
+      if(lang=='en'){
+          if(this.formEmail.email==''){
           this.$notify({
-            title: '邮箱修改成功',
-            type: 'success',
-            duration: 1500
+            title: 'Please enter email',
+            type: 'error',
+            duration: 2500
           })
-          this.formEmail={
-            email:'',
-            pass:'',
-            code:'',
-          }
-          this.emailPopup=false;
-          store.dispatch('GetInfo').then(() => {})
-        }).catch(err => {
-          console.log(err.response.data.message)
-        })
+        }else if(this.formEmail.code===this.email){
+          this.$notify({
+            title: 'The new mailbox cannot be the same as the old mailbox',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.formEmail.code==''){
+          this.$notify({
+            title: 'Please enter the verification code',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.formEmail.pass==''){
+          this.$notify({
+            title: 'Please input a password',
+            type: 'error',
+            duration: 2500
+          })
+        }else{
+          this.emailData = { email: this.formEmail.email, password: this.formEmail.pass }
+          console.log(this.emailData)
+          updateEmail(this.formEmail.code, this.emailData).then(res => {
+            this.$notify({
+              title: 'Mailbox modified successfully',
+              type: 'success',
+              duration: 1500
+            })
+            this.formEmail={
+              email:'',
+              pass:'',
+              code:'',
+            }
+            this.emailPopup=false;
+            store.dispatch('GetInfo').then(() => {})
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }
+      }else{
+        if(this.formEmail.email==''){
+          this.$notify({
+            title: '请输入邮箱',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.formEmail.code===this.email){
+          this.$notify({
+            title: '新邮箱不能与旧邮箱相同',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.formEmail.code==''){
+          this.$notify({
+            title: '请输入验证码',
+            type: 'error',
+            duration: 2500
+          })
+        }else if(this.formEmail.pass==''){
+          this.$notify({
+            title: '请输入密码',
+            type: 'error',
+            duration: 2500
+          })
+        }else{
+          this.emailData = { email: this.formEmail.email, password: this.formEmail.pass }
+          console.log(this.emailData)
+          updateEmail(this.formEmail.code, this.emailData).then(res => {
+            this.$notify({
+              title: '邮箱修改成功',
+              type: 'success',
+              duration: 1500
+            })
+            this.formEmail={
+              email:'',
+              pass:'',
+              code:'',
+            }
+            this.emailPopup=false;
+            store.dispatch('GetInfo').then(() => {})
+          }).catch(err => {
+            console.log(err.response.data.message)
+          })
+        }
       }
     },
 
@@ -325,6 +512,9 @@ export default {
       this.formEmail.pass='',
       this.formEmail.email='',
       this.formEmail.code=''
+    },
+    closeLevel(){
+      this.levelPopup=false;
     }
   },
 }
@@ -366,6 +556,20 @@ export default {
     background-size: 100% 100%;
     padding: 10px;
     box-sizing: border-box;
+    position: relative;
+  }
+  .user-center .user-box .item .user-img .level-box{
+    display: inline-block;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width:50px;
+    height:50px;
+    background:rgba(13,29,76,1);
+    border:2px solid rgba(0,255,255,1);
+    border-radius:50%;
+    line-height: 50px;
+    text-align: center;
   }
   .avatar-uploader{
     width: 100%;
@@ -455,6 +659,7 @@ export default {
     text-align: center;
     line-height: 68px;
     color: rgba(43, 250, 255, 1);
+    font-size: 16px;
   }
   .modifyPopup .modify-content .popup-form .form-item .input-box::-webkit-input-placeholder{
     color: #fff;
@@ -501,6 +706,61 @@ export default {
     background: rgba(0, 128, 202, 0.4);
     border: 1px solid rgba(0, 190, 255, 0.6);
     color: #fff;
+  }
+  .level{
+    font-family:CTBiaoSongSJ;
+    font-size: 30px;
+    color: rgba(0, 255, 255, 1);
+    font-weight: 500;
+  }
+
+  .level-content{
+    margin-top: 50px;
+    padding: 0 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+   .level-content .level-item{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .level-content .level-item > span{
+    display: block;
+  }
+   .level-content .level-item .level-left{
+    width:60px;
+    height:60px;
+    background:rgba(13,29,76,1);
+    border:2px solid rgba(0,255,255,1);
+    border-radius:50%;
+    line-height: 60px;
+    text-align: center;
+  }
+   .level-content .level-item .level-middel{
+    width:91px;
+    /* height:2px; */
+    font-size:30px;
+    /* font-family:CTBiaoSongSJ; */
+    font-weight:400;
+    background:rgba(255,255,255,1);
+  }
+   .level-content .level-item .level-right{
+    font-size: 26px;
+    color: rgba(255, 255, 255, 1);
+  }
+  .level-content .level-btn{
+    width:190px;
+    height:70px;
+    background:rgba(14,30,75,1);
+    border:1px solid rgba(33,191,252,1);
+    font-size: 26px;
+    color: #00FFFF;
+    margin-top: 40px;
   }
 </style>
 

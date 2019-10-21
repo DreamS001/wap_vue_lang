@@ -1,3 +1,13 @@
+//登录
+export function login(hw){
+  const hasKey = this.$te('hw.' + hw)
+  const translatedTitle = this.$t('hw.' + hw) // $t :this method from vue-i18n, inject in @/lang/index.js
+
+  if (hasKey) {
+    return translatedTitle
+  }
+  return hw
+}
 //头部
 export function fpthome(hw){
     const hasKey = this.$te('hw.' + hw)

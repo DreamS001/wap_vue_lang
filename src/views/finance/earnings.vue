@@ -1,6 +1,6 @@
 <template>
   <div class="earnings-content">
-    <h5>{{$t('financeEarnings.title_1')}}</h5>
+    <h5>{{$t('financeEarnings.wallet')}}</h5>
     <div class="earnings-item">
       <div class="item-top">
         <div class="top-left">
@@ -124,25 +124,25 @@
           <div class="form-item">
             <span>{{$t('financeEarnings.VerificationCode')}}：</span>
             <div>
-              <input class="input-box" type="text" v-model="orderWithdraw.code" placeholder="请输入验证码">
+              <input class="input-box" type="text" v-model="orderWithdraw.code" :placeholder="$t('login.VerificationCode')">
             </div>
           </div>
           <div class="form-item">
             <span>{{$t('financeEarnings.cash_amount')}}：</span>
             <div>
-              <input class="input-box" type="text" v-model="orderWithdraw.amount" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入金额（提现额度不能大于总额）">
+              <input class="input-box" type="text" v-model="orderWithdraw.amount" oninput="value=value.replace(/[^\d]/g,'')" :placeholder="$t('financeEarnings.input_pl_1')">
             </div>
           </div>
           <div class="form-item">
             <span>{{$t('financeEarnings.cash_adress')}}：</span>
             <div>
-              <input class="input-box" type="text" v-model="orderWithdraw.tokenId" placeholder="请输入提现地址">
+              <input class="input-box" type="text" v-model="orderWithdraw.tokenId" :placeholder="$t('financeEarnings.input_pl_2')">
             </div>
           </div>
           <div class="form-item">
             <span>{{$t('financeEarnings.remarks')}}：</span>
             <div>
-              <input class="input-box" type="text" v-model="orderWithdraw.remark" placeholder="请输入备注内容">
+              <input class="input-box" type="text" v-model="orderWithdraw.remark" :placeholder="$t('financeEarnings.input_pl_3')">
             </div>
           </div>
 
@@ -176,13 +176,13 @@
           <div class="form-item">
             <span>{{$t('financeEarnings.recharge_amount')}}：</span>
             <div>
-              <input class="input-box" type="text" oninput="value=value.replace(/[^\d]/g,'')" v-model="orderToup.amount" placeholder="请输入金额">
+              <input class="input-box" type="text" oninput="value=value.replace(/[^\d]/g,'')" v-model="orderToup.amount" :placeholder="$t('financeEarnings.input_pl_1')">
             </div>
           </div>
           <div class="form-item">
             <span>{{$t('financeEarnings.jy_number')}}：</span>
             <div>
-              <input class="input-box" type="text" v-model="orderToup.tokenId" placeholder="请输入交易单号">
+              <input class="input-box" type="text" v-model="orderToup.tokenId" :placeholder="$t('financeEarnings.input_pl_4')">
             </div>
           </div>
           <div class="form-item">
@@ -205,7 +205,10 @@ import {finan,finana,pages,cashlist,withdraw,topup,toup,getEmailCode} from "@/ap
 import { Toast } from 'mint-ui';
 import { mapGetters } from 'vuex'
 
-import { financeEarnings } from '@/utils/i18n'// 国际化主题名字
+import { financeEarnings,login } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -234,7 +237,8 @@ export default {
         remark: "",
         code:'',
       },
-      buttonName:'获取验证码',
+      // buttonName:'获取验证码',
+      buttonName:'Get verification code',
       timer:null,
       isDisabled:false,
       time: 60,
@@ -247,6 +251,7 @@ export default {
   },
   created(){
     this.getEarningsData();
+    console.log('钱包主页')
   },
   methods: {
     financeEarnings,
@@ -294,110 +299,218 @@ export default {
     },
     //获取邮箱验证码
     getCode(){
-      if (this.user.email) {
-        this.buttonName = '验证码发送中'
-        const _this = this
-        getEmailCode().then(res => {
-          console.log(res);
-          if(res.code==200){
-            Toast({
-              message: '发送成功，验证码有效期5分钟',
-              duration: 3000,
-              iconClass: 'iconfont icon-cs-cg-1'
-            });
-            this.isDisabled = true
-            this.buttonName = this.time-- + '秒后重新发送'
-            this.timer = window.setInterval(function() {
-              _this.buttonName = _this.time + '秒后重新发送'
-              --_this.time
-              if (_this.time < 0) {
-                _this.buttonName = '重新发送'
-                _this.time = 60
-                _this.isDisabled = false
-                window.clearInterval(_this.timer)
-              }
-            }, 1000)
-          }else{
-            Toast({
-              message:res.msg,
-              duration:3000,
-              iconClass:'iconfont icon-cs-sb-1'
-            })
-          }
-        }).catch(err => {
-          this.resetForm()
-          this.codeLoading = false
-          console.log(err.response.data.message)
-        });
+      if(lang=='en'){
+          if (this.user.email) {
+          this.buttonName = 'Verification code sending'
+          const _this = this
+          getEmailCode().then(res => {
+            console.log(res);
+            if(res.code==200){
+              Toast({
+                message: 'Send successfully, validation code valid for 5 minutes',
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-cg-1'
+              });
+              this.isDisabled = true
+              this.buttonName = this.time-- + 'Resend in seconds'
+              this.timer = window.setInterval(function() {
+                _this.buttonName = _this.time + 'Resend in seconds'
+                --_this.time
+                if (_this.time < 0) {
+                  _this.buttonName = 'Resend'
+                  _this.time = 60
+                  _this.isDisabled = false
+                  window.clearInterval(_this.timer)
+                }
+              }, 1000)
+            }else{
+              Toast({
+                message:res.msg,
+                duration:3000,
+                iconClass:'iconfont icon-cs-sb-1'
+              })
+            }
+          }).catch(err => {
+            this.resetForm()
+            this.codeLoading = false
+            console.log(err.response.data.message)
+          });
+        }
+      }else{
+        if (this.user.email) {
+          this.buttonName = '验证码发送中'
+          const _this = this
+          getEmailCode().then(res => {
+            console.log(res);
+            if(res.code==200){
+              Toast({
+                message: '发送成功，验证码有效期5分钟',
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-cg-1'
+              });
+              this.isDisabled = true
+              this.buttonName = this.time-- + '秒后重新发送'
+              this.timer = window.setInterval(function() {
+                _this.buttonName = _this.time + '秒后重新发送'
+                --_this.time
+                if (_this.time < 0) {
+                  _this.buttonName = '重新发送'
+                  _this.time = 60
+                  _this.isDisabled = false
+                  window.clearInterval(_this.timer)
+                }
+              }, 1000)
+            }else{
+              Toast({
+                message:res.msg,
+                duration:3000,
+                iconClass:'iconfont icon-cs-sb-1'
+              })
+            }
+          }).catch(err => {
+            this.resetForm()
+            this.codeLoading = false
+            console.log(err.response.data.message)
+          });
+        }
       }
     },
     //提现确定
     surePresentation(){
-      if (this.orderWithdraw.code == "") {
-          // this.$message.error("请输入验证码");
-          Toast({
-            message: '请输入验证码',
-            duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-          });
-      }else if (this.orderWithdraw.amount == "") {
-        // this.$message.error("请输入金额");
-        Toast({
-          message: '请输入金额',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      }else if(this.orderWithdraw.amount <=0){
-        // that.$message.error("输入金额必须大于零");
-        Toast({
-          message: '输入金额必须大于零',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else if (this.orderWithdraw.amount > this.cashData.totalCash) {
-        // this.$message.error("提现额度不能大于总额度");
-        Toast({
-          message: '提现额度不能大于总额度',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else if (this.orderWithdraw.tokenId == "") {
-        // this.$message.error("请输入地址");
-        Toast({
-          message: '请输入地址',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      }  else {
-        console.log(this.orderWithdraw);
-        withdraw(this.orderWithdraw).then(res => {
-          console.log(res);
-          this.presentation=false;
-          if(res.code==200){
+      if(lang=='en'){
+          if (this.orderWithdraw.code == "") {
+            // this.$message.error("请输入验证码");
             Toast({
-              message: '恭喜你，提交成功',
+              message: 'Please enter the verification code',
               duration: 3000,
-              iconClass: 'iconfont icon-cs-cg-1'
+            iconClass: 'iconfont icon-jinggao'
             });
-            setTimeout(()=>{
-              this.$router.push({
-                path: "/finance/withdraw"
+        }else if (this.orderWithdraw.amount == "") {
+          // this.$message.error("请输入金额");
+          Toast({
+            message: 'Please enter the amount',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else if(this.orderWithdraw.amount <=0){
+          // that.$message.error("输入金额必须大于零");
+          Toast({
+            message: 'Input amount must be greater than zero',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderWithdraw.amount > this.cashData.totalCash) {
+          // this.$message.error("提现额度不能大于总额度");
+          Toast({
+            message: 'The withdrawal amount cannot be greater than the total amount',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderWithdraw.tokenId == "") {
+          // this.$message.error("请输入地址");
+          Toast({
+            message: 'Please enter the address',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }  else {
+          console.log(this.orderWithdraw);
+          withdraw(this.orderWithdraw).then(res => {
+            console.log(res);
+            this.presentation=false;
+            if(res.code==200){
+              Toast({
+                message: res.msg,
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-cg-1'
               });
-            },3000)
-            this.orderWithdraw= {//提现数据
-              amount: "",
-              tokenId: "",
-              remark:"",
-              code:'',
+              setTimeout(()=>{
+                this.$router.push({
+                  path: "/finance/withdraw"
+                });
+              },3000)
+              this.orderWithdraw= {//提现数据
+                amount: "",
+                tokenId: "",
+                remark:"",
+                code:'',
+              }
+            }else{
+              Toast({
+                message:res.msg,
+                duration:3000,
+                iconClass:'iconfont icon-cs-sb-1'
+              })
             }
-          }else{
+          });
+        }
+      }else{
+        if (this.orderWithdraw.code == "") {
+            // this.$message.error("请输入验证码");
             Toast({
-              message:res.msg,
-              duration:3000,
-              iconClass:'iconfont icon-cs-sb-1'
-            })
-          }
-        });
+              message: '请输入验证码',
+              duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+            });
+        }else if (this.orderWithdraw.amount == "") {
+          // this.$message.error("请输入金额");
+          Toast({
+            message: '请输入金额',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else if(this.orderWithdraw.amount <=0){
+          // that.$message.error("输入金额必须大于零");
+          Toast({
+            message: '输入金额必须大于零',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderWithdraw.amount > this.cashData.totalCash) {
+          // this.$message.error("提现额度不能大于总额度");
+          Toast({
+            message: '提现额度不能大于总额度',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderWithdraw.tokenId == "") {
+          // this.$message.error("请输入地址");
+          Toast({
+            message: '请输入地址',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }  else {
+          console.log(this.orderWithdraw);
+          withdraw(this.orderWithdraw).then(res => {
+            console.log(res);
+            this.presentation=false;
+            if(res.code==200){
+              Toast({
+                message: res.msg,
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-cg-1'
+              });
+              setTimeout(()=>{
+                this.$router.push({
+                  path: "/finance/withdraw"
+                });
+              },3000)
+              this.orderWithdraw= {//提现数据
+                amount: "",
+                tokenId: "",
+                remark:"",
+                code:'',
+              }
+            }else{
+              Toast({
+                message:res.msg,
+                duration:3000,
+                iconClass:'iconfont icon-cs-sb-1'
+              })
+            }
+          });
+        }
       }
     },
     selectItem(e){
@@ -407,13 +520,24 @@ export default {
       this.topup_a = this.cashlists[e];
     },
     sureBtn(){
-      if(this.current==1000){
-        Toast({
-          message: '请选择充值地址',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.current==1000){
+          Toast({
+            message: 'Please select recharge address',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.current==1000){
+          Toast({
+            message: '请选择充值地址',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.recharge=false;
       this.recharge2=true;
@@ -422,64 +546,126 @@ export default {
     //充值确认
     sureBtn1(){
       this.orderToup.thirdId = this.topup_a.token;
-      if (this.orderToup.amount == "") {
-        // alert("请输入金额");
-        //   this.$message({
-        //   message: "请输入金额",
-        //   type: "none"
-        // });
-        Toast({
-          message: '请输入金额',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else if(this.orderToup.amount <=0){
-        // this.$message({
-        //   message: "输入金额必须大于零",
-        //   type: "none"
-        // });
-        Toast({
-          message: '输入金额必须大于零',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else if (this.orderToup.tokenId == "") {
-        // alert("请输入订单号");
-        // this.$message({
-        //   message: "请输入订单号",
-        //   type: "none"
-        // });
-        Toast({
-          message: '请输入订单号',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else {
-        toup(this.orderToup).then(res => {
-          // var data=JSON.parse(res.data)
-          console.log(res);
-          this.recharge2=false;
-          // console.log(this.amount);
-          if(res.code==200){
-            Toast({
-              message: res.msg,
-              duration: 5000,
-            iconClass: 'iconfont icon-cs-cg-1'
-            });
-            setTimeout(()=>{
-              this.$router.push({
-                path: "/finance/recharge",
-                query: { topupMoney: this.orderToup.amount }
+      if(lang=='en'){
+          if (this.orderToup.amount == "") {
+          // alert("请输入金额");
+          //   this.$message({
+          //   message: "请输入金额",
+          //   type: "none"
+          // });
+          Toast({
+            message: 'Please enter the amount',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if(this.orderToup.amount <=0){
+          // this.$message({
+          //   message: "输入金额必须大于零",
+          //   type: "none"
+          // });
+          Toast({
+            message: 'Input amount must be greater than zero',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderToup.tokenId == "") {
+          // alert("请输入订单号");
+          // this.$message({
+          //   message: "请输入订单号",
+          //   type: "none"
+          // });
+          Toast({
+            message: 'Please enter the order number',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else {
+          toup(this.orderToup).then(res => {
+            // var data=JSON.parse(res.data)
+            console.log(res);
+            this.recharge2=false;
+            // console.log(this.amount);
+            if(res.code==200){
+              Toast({
+                message: res.msg,
+                duration: 5000,
+              iconClass: 'iconfont icon-cs-cg-1'
               });
-            },3000)
-          }else{
-            Toast({
-              message: res.msg,
-              duration: 3000,
-            iconClass: 'iconfont icon-cs-sb-1'
-            });
-          }
-        });
+              setTimeout(()=>{
+                this.$router.push({
+                  path: "/finance/recharge",
+                  query: { topupMoney: this.orderToup.amount }
+                });
+              },3000)
+            }else{
+              Toast({
+                message: res.msg,
+                duration: 3000,
+              iconClass: 'iconfont icon-cs-sb-1'
+              });
+            }
+          });
+        }
+      }else{
+        if (this.orderToup.amount == "") {
+          // alert("请输入金额");
+          //   this.$message({
+          //   message: "请输入金额",
+          //   type: "none"
+          // });
+          Toast({
+            message: '请输入金额',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if(this.orderToup.amount <=0){
+          // this.$message({
+          //   message: "输入金额必须大于零",
+          //   type: "none"
+          // });
+          Toast({
+            message: '输入金额必须大于零',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if (this.orderToup.tokenId == "") {
+          // alert("请输入订单号");
+          // this.$message({
+          //   message: "请输入订单号",
+          //   type: "none"
+          // });
+          Toast({
+            message: '请输入订单号',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else {
+          toup(this.orderToup).then(res => {
+            // var data=JSON.parse(res.data)
+            console.log(res);
+            this.recharge2=false;
+            // console.log(this.amount);
+            if(res.code==200){
+              Toast({
+                message: res.msg,
+                duration: 5000,
+              iconClass: 'iconfont icon-cs-cg-1'
+              });
+              setTimeout(()=>{
+                this.$router.push({
+                  path: "/finance/recharge",
+                  query: { topupMoney: this.orderToup.amount }
+                });
+              },3000)
+            }else{
+              Toast({
+                message: res.msg,
+                duration: 3000,
+              iconClass: 'iconfont icon-cs-sb-1'
+              });
+            }
+          });
+        }
       }
     },
     //关闭弹框
@@ -593,10 +779,12 @@ export default {
      justify-content: space-around;
   }
   .earnings-content .earnings-item .item-bottom .earnings-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     text-align: center;
     line-height: 40px;
     font-size: 22px;
@@ -662,7 +850,7 @@ export default {
 
   } */
   .popup .popup-content .popup-form .form-item .code-btn{
-    width: 190px;
+    /* width: 190px; */
     height: 68px;
     border: 1px solid rgba(33, 191, 252, 1);
     text-align: center;

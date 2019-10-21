@@ -2,46 +2,46 @@
   <div class="p-box">
     <div class="search-box">
       <div class="date-box">
-        <span>自定义：</span>
+        <span>{{$t('financeCash.customQuery')}}：</span>
         <div class="date-picker">
           <div class="input-btn" @click="selectbeginDate">
-            <input type="text" readonly v-model="beginDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="beginDate" :placeholder="$t('financeCash.place_date')">
           </div>
-          <span>至</span>
+          <span>-</span>
           <div class="input-btn" @click="selectendDate">
-            <input type="text" readonly v-model="endDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="endDate" :placeholder="$t('financeCash.place_date')">
           </div>
         </div>
       </div>
       <div class="date-box">
-        <span>流水号：</span>
+        <span>{{$t('financeCash.serial_number')}}：</span>
         <div class="date-picker">
           <div class="" style="width:100%;">
             <input style="width:100%;" type="text" v-model="pipelineNum" placeholder="">
           </div>
         </div>
       </div>
-      <div class="rest-btn" @click="restBtn">重置</div>
-      <div class="search-btn" @click="searchData">查询</div>
+      <div class="rest-btn" @click="restBtn">{{$t('financeCash.rest')}}</div>
+      <div class="search-btn" @click="searchData">{{$t('financeCash.query')}}</div>
     </div>
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
         <el-table :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-          <el-table-column prop="complete_time" label="日期" min-width="190" align="center"/>
-          <el-table-column style="color:red" prop="merchant_order_id" label="流水号" min-width="200" align="center"/>
-          <el-table-column style="color:red" prop="merchant_order_id" label="名称" min-width="200" align="center"/>
-          <el-table-column style="color:red" prop="qcf_device_num" label="设备号" min-width="180" align="center"/>
-          <el-table-column style="color:red" prop="order_amount" label="交易金额（$）" min-width="170" align="center"/>
-          <el-table-column prop="order_status" label="交易状态" align="center" :show-overflow-tooltip="true">
+          <el-table-column prop="complete_time" :label="$t('financeCash.date')" min-width="190" align="center"/>
+          <el-table-column style="color:red" prop="merchant_order_id" :label="$t('financeCash.serial_number')" min-width="200" align="center"/>
+          <el-table-column style="color:red" prop="merchant_order_id" :label="$t('financeCash.name')" min-width="200" align="center"/>
+          <el-table-column style="color:red" prop="qcf_device_num" :label="$t('financeCash.device_number')" min-width="180" align="center"/>
+          <el-table-column style="color:red" prop="order_amount" :label="$t('financeCash.transaction_amount')" min-width="170" align="center"/>
+          <el-table-column prop="order_status" :label="$t('financeCash.trading_status')" min-width="170" align="center" :show-overflow-tooltip="true">
             <template slot-scope="scope">
-              <div class="status-box" style="color:rgba(255, 73, 73, 1);" v-if="scope.row.order_status===0">未提交</div>
-              <div class="status-box" style="color:rgba(19, 206, 102, 1);" v-else-if="scope.row.order_status===3">交易成功</div>
-              <div class="status-box" style="color:rgba(47, 228, 255, 1);" v-else-if="scope.row.order_status===5">退款完成</div>
-              <div class="status-box" style="color:rgba(19, 206, 102, 1);" v-else-if="scope.row.order_status===7">订单已撤销</div>
-              <div class="status-box" style="color:rgba(255, 73, 73, 1);" v-else>未知状态</div>
+              <div class="status-box" style="color:rgba(255, 73, 73, 1);" v-if="scope.row.order_status===0">{{$t('financeCash.not_submitted')}}</div>
+              <div class="status-box" style="color:rgba(19, 206, 102, 1);" v-else-if="scope.row.order_status===3">{{$t('financeCash.successful_trade')}}</div>
+              <div class="status-box" style="color:rgba(47, 228, 255, 1);" v-else-if="scope.row.order_status===5">{{$t('financeCash.refund_completed')}}</div>
+              <div class="status-box" style="color:rgba(19, 206, 102, 1);" v-else-if="scope.row.order_status===7">{{$t('financeCash.order_cancelled')}}</div>
+              <div class="status-box" style="color:rgba(255, 73, 73, 1);" v-else>{{$t('financeCash.unknown_state')}}</div>
             </template>
           </el-table-column>
-          <el-table-column style="color:red" prop="loc_info" label="备注" min-width="150" align="center"/>
+          <el-table-column style="color:red" prop="loc_info" :label="$t('financeCash.remark')"  min-width="150" align="center"/>
           <!-- <el-table-column label="操作" min-width="150" align="center">
             <template slot-scope="scope">
               <div class="ck-btn" @click="reveal(scope.$index, scope.row)">查看详情</div>
@@ -50,7 +50,7 @@
         </el-table>
       </div>
 
-      <button class="more-btn" @click="getMore">更多</button>
+      <button class="more-btn" @click="getMore">{{$t('financeCash.more')}}</button>
     </div>
 
     <div class="popup" v-if="FC" @click="closePopup">
@@ -82,6 +82,10 @@ import '../../utils/screen'
 import { tradeQuery} from "@/api/facility";
 import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
+import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -132,21 +136,40 @@ export default {
     },
     searchData(){
       this.pageNo=1
-      if(this.beginDate !='' &&this.endDate==''){
-        Toast({
-          message: '请选择结束时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
-      }
-      if(this.beginDate =='' &&this.endDate !=''){
-        Toast({
-          message: '请选择开始时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: 'Please select the end time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: 'Please select a start time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: '请选择结束时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: '请选择开始时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.list=[]
       this.request();
@@ -176,11 +199,19 @@ export default {
         //   message: "没有更多了",
         //   type: "none"
         // });
-        Toast({
-          message: '没有更多了',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+       if(lang=='en'){
+            Toast({
+              message: 'No more',
+              duration: 3000,
+              iconClass: 'iconfont icon-jinggao'
+            });
+        }else{
+          Toast({
+            message: '没有更多了',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
         return false
       }
       this.request();
@@ -292,25 +323,29 @@ export default {
     text-align: center;
   }
   .p-box .search-box .search-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     right: 20px;
     bottom: 25px;
   }
   .rest-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     right: 20px;
     top: 25px;

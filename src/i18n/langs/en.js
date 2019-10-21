@@ -9,6 +9,16 @@
 // export default en;
 
 const en = {
+    //登录
+    login:{
+      placeholder_username:'Please enter account',
+      placeholder_password:'Please input a password',
+      VerificationCode:'Please input verification code',
+      login:'Sign in',
+      desc_word:'Sign in to agree',
+      xieyi:'《Registration Agreement》',
+      xyxieyi:'《Credit authorization agreement》',
+    },
     // 导航栏
     navbar: {
       title: 'Welcome',
@@ -105,13 +115,18 @@ const en = {
       recharge_amount:'Recharge Amount',
       remarks:'Remarks',
       jy_number:'Transaction number',
-      VerificationCode:'VerificationCode',
-      no_more:'Cannot be greater than the total quota'
+      VerificationCode:'Verification Code',
+      no_more:'Cannot be greater than the total quota',
+      input_pl_1:'Please enter the amount',
+      input_pl_2:'Please enter withdrawal address',
+      input_pl_3:'Please enter notes',
+      input_pl_4:'Please enter transaction No',
     },
     financeCash:{
       title_2:'Dynamic wallet revenue（$）',
       title_3:'Static wallet revenue（$）',
       customQuery:'Custom query',
+      rest:'Reset',
       query:'query',
       export:'export',
       date:'Date',
@@ -127,6 +142,10 @@ const en = {
       original_integral:'Original Integral',
       integral_growth:'Integral growth',
       existing_integral:'Existing integral',
+      more:'More',
+      place_date:'Select a date',
+      ID:'Transaction ID',
+      wallet_adress:'Wallet address',
 
       serial_number :'Serial number',
       recharge_date:'Recharge Date',
@@ -140,7 +159,52 @@ const en = {
       adopt:'Adopt',
       reject:'Reject',
       reasons_for_remarks:'Reasons For Remarks',
+
+      name:'Name',
+      device_number:'Device number',
+      transaction_amount:'Transaction amount ($)',
+      trading_status:'Trading status',
+      not_submitted:'Not submitted',
+      successful_trade:'Successful trade',
+      refund_completed:'Refund completed',
+      order_cancelled:'Order cancelled',
+      unknown_state:'Unknown state',
+
+      membership_number:'Membership number',
+      member_name:'Member name',
+      member:'Member',
+      contact_information:'Contact information',
+      investment_amount:'Investment amount ($)',
+      current_balance:'Current balance ($)',
+      team_number:'Team number (person)',
+
+      user_name:'User name',
+      account_level:'Account level',
+      phone_number:'Phone number',
+      user_email:'User mail box',
+      subordinate_departments:'Subordinate departments',
+      date_of_creation:'Date of creation',
+      security_setting:'Security setting',
+      change_password:'Change Password',
+      modify_mailbox:'Modify mailbox',
+      old_password:'Old password',
+      new_password:'New password',
+      confirm_password:'Confirm password',
+      place_old:'Please enter the old password',
+      place_new:'Please enter a new password',
+      place_new_again:'Please enter the new password again',
+      place_email_new:'Please enter a new email',
+      place_pass:'Please input a password',
+      
+      level_description:'Level description',
+      ordinary_member:'Ordinary member',
+      gold_member:'Gold member',
+      platinum_members:'Platinum members',
+      diamond_member:'Diamond member',
     },
+    route:{
+      home:'Home'
+    }
     
   }
 

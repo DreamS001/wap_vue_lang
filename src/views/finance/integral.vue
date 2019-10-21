@@ -2,43 +2,43 @@
   <div class="p-box">
     <div class="search-box">
       <div class="date-box">
-        <span>自&nbsp;&nbsp;定&nbsp;&nbsp;义：</span>
+        <span>{{$t('financeCash.customQuery')}}：</span>
         <div class="date-picker">
           <div class="input-btn" @click="selectbeginDate">
-            <input type="text" readonly v-model="beginDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="beginDate" :placeholder="$t('financeCash.place_date')">
           </div>
-          <span>至</span>
+          <span>-</span>
           <div class="input-btn" @click="selectendDate">
-            <input type="text" readonly v-model="endDate" placeholder="请选择日期">
+            <input type="text" readonly v-model="endDate" :placeholder="$t('financeCash.place_date')">
           </div>
         </div>
       </div>
       <div class="date-box">
-        <span>积分来源：</span>
+        <span>{{$t('financeCash.points_source')}}：</span>
         <div class="date-picker">
           <div class="" style="width:100%">
             <input style="width:100%" type="text" v-model="name">
           </div>
         </div>
       </div>
-      <div class="rest-btn" @click="restBtn">重置</div>
-      <div class="search-btn" @click="searchData">查询</div>
+      <div class="rest-btn" @click="restBtn">{{$t('financeCash.rest')}}</div>
+      <div class="search-btn" @click="searchData">{{$t('financeCash.query')}}</div>
     </div>
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
         <el-table :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-          <el-table-column style="color:red" prop="create_time" label="日期" min-width="160" align="center" >
+          <el-table-column style="color:red" prop="create_time" :label="$t('financeCash.date')" min-width="160" align="center" >
             <template slot-scope="scope">
               <div>
                 {{scope.row.create_time | dateFormat}}
               </div>
             </template>
           </el-table-column>
-          <el-table-column style="color:red" prop="credit_dest_id" label="积分来源" min-width="160" align="center"/>
-          <el-table-column style="color:red" prop="investor_id" label="资方标识" min-width="160" align="center"/>
-          <el-table-column style="color:red" prop="old_credit" label="原有积分" min-width="150" align="center"/>
-          <el-table-column style="color:red" prop="new_credit" label="现有积分" min-width="170" align="center"/>
-          <el-table-column style="color:red" prop="credit_increase" label="积分增长" min-width="170" align="center"/>
+          <el-table-column style="color:red" prop="credit_dest_id" :label="$t('financeCash.points_source')" min-width="160" align="center"/>
+          <el-table-column style="color:red" prop="investor_id" :label="$t('financeCash.identification')" min-width="160" align="center"/>
+          <el-table-column style="color:red" prop="old_credit" :label="$t('financeCash.original_integral')" min-width="150" align="center"/>
+          <el-table-column style="color:red" prop="new_credit" :label="$t('financeCash.existing_integral')" min-width="170" align="center"/>
+          <el-table-column style="color:red" prop="credit_increase" :label="$t('financeCash.integral_growth')" min-width="170" align="center"/>
           <!-- <el-table-column label="操作" min-width="150" align="center">
             <template slot-scope="scope">
               <div class="ck-btn" @click="reveal(scope.$index, scope.row)">查看详情</div>
@@ -47,7 +47,7 @@
         </el-table>
       </div>
 
-      <button class="more-btn" @click="getMore">更多</button>
+      <button class="more-btn" @click="getMore">{{$t('financeCash.more')}}</button>
     </div>
 
     <div class="popup" v-if="FC" @click="closePopup">
@@ -79,6 +79,10 @@ import '../../utils/screen'
 import { cash, cashlist, cashquery,integral } from '@/api/finance'
 import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
+import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -92,12 +96,19 @@ export default {
       total:0,//总条数
       FC:false,
       lielist:[],//每条数据的详情
+
+      lang:''
     }
   },
   created(){
+    // console.log(language)
     var date = new Date()
     this.todayDate = formatDate(date, 'yyyy-MM-dd')
     this.request();
+    // this.lang=Cookies.get('language') || 'en'
+    // console.log(lang)
+    // console.log(Cookies.get('language'))
+    // console.log(lang)
   },
   methods: {
     selectbeginDate(){
@@ -129,21 +140,40 @@ export default {
     },
     searchData(){
       this.pageNo=1
-      if(this.beginDate !='' &&this.endDate==''){
-        Toast({
-          message: '请选择结束时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
-      }
-      if(this.beginDate =='' &&this.endDate !=''){
-        Toast({
-          message: '请选择开始时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: 'Please select the end time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: 'Please select a start time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: '请选择结束时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: '请选择开始时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.list=[]
       this.request();
@@ -172,11 +202,19 @@ export default {
         //   message: "没有更多了",
         //   type: "none"
         // });
-        Toast({
-          message: '没有更多了',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+        if(lang=='en'){
+            Toast({
+              message: 'No more',
+              duration: 3000,
+              iconClass: 'iconfont icon-jinggao'
+            });
+        }else{
+          Toast({
+            message: '没有更多了',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
         return false
       }
       this.request();
@@ -278,25 +316,29 @@ export default {
     text-align: center;
   }
   .p-box .search-box .search-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     right: 20px;
     bottom: 25px;
   }
   .rest-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
     position: absolute;
     right: 20px;
     top: 25px;

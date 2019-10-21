@@ -7,12 +7,12 @@
         <div class="container-main">
           <form action="">
             <div class="logo"></div>
-            <div class="login-input"><input type="email" v-model="loginForm.username" placeholder="请输入账户"></div>
-            <div class="login-input"><input type="password" v-model="loginForm.password" placeholder="请输入密码"></div>
-            <div class="div-code" style=""><input class="login-code" type="text" v-model="loginForm.code" placeholder="请输入验证码"><img :src="codeUrl" @click="getCode"></div>
+            <div class="login-input"><input type="email" v-model="loginForm.username" :placeholder="$t('login.placeholder_username')"></div>
+            <div class="login-input"><input type="password" v-model="loginForm.password" :placeholder="$t('login.placeholder_password')"></div>
+            <div class="div-code" style=""><input class="login-code" type="text" v-model="loginForm.code" :placeholder="$t('login.VerificationCode')"><img :src="codeUrl" @click="getCode"></div>
             <!-- <div class="forget-password" style="">忘记密码</div> -->
-            <div class="login-button" @click="handleLogin"><span>登录</span></div>
-            <div class="agreement"><div>登录即同意 <router-link to="">《注册协议》</router-link>  <router-link to="">《信用授权协议》</router-link></div></div>
+            <div class="login-button" @click="handleLogin"><span>{{$t('login.login')}}</span></div>
+            <div class="agreement"><div>{{$t('login.desc_word')}} <router-link to="">{{$t('login.xieyi')}}</router-link>  <router-link to="">{{$t('login.xyxieyi')}}</router-link></div></div>
           </form>
         </div>
     </div>
@@ -24,6 +24,9 @@ import Config from '@/config'
 import { getCodeImg } from '@/api/login'
 import Cookies from 'js-cookie'
 import { Toast } from 'mint-ui';
+
+
+import { login } from '@/utils/i18n'// 国际化主题名字
 export default {
   name:"Login",
   data(){
@@ -52,6 +55,7 @@ export default {
     this.getCookie()
   },
   methods:{
+    login,
     getCode() {
       getCodeImg().then(res => {
         this.codeUrl = 'data:image/gif;base64,' + res.img
@@ -257,7 +261,8 @@ export default {
     display:inline-block;
   }
   .agreement{
-    width:100%;
+    /* width:100%; */
+    width:600px;
     font-size: 24px;
     color:#fff;
 
