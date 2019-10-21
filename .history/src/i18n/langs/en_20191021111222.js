@@ -76,8 +76,8 @@ const en = {
       //用户管理
       keyword:'Key words',
       enterkeywordsearch:'Enter keyword search',
-      type:'types',
-      status:'state',
+      type:'type',
+      status:'status',
       username:'username',
       phone:'phone',
       mailbox:'mailbox',

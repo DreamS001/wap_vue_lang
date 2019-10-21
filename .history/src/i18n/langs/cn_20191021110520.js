@@ -82,7 +82,6 @@ const cn= {
     username:'用户名',
     phone:'电话',
     mailbox:'邮箱',
-    query:'查询',
     usertype:'用户类型',
     merchantidentification:'商户标识',
     creationdate:'创建日期',

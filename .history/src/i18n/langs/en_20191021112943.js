@@ -77,7 +77,7 @@ const en = {
       keyword:'Key words',
       enterkeywordsearch:'Enter keyword search',
       type:'types',
-      status:'state',
+      status:'status',
       username:'username',
       phone:'phone',
       mailbox:'mailbox',

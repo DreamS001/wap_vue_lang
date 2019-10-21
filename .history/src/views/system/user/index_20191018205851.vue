@@ -2,21 +2,15 @@
   <div class="p-box">
     <div class="search-box">
       <div class="date-box">
-        <span style="margin-right:0.05rem;width:1.1rem">
-          <!-- 关键词： -->
-          {{$t('systemes.keyword')}}
-        </span>
+        <span>关键词：</span>
         <div class="date-picker">
-          <div class="input-btn" style="width:100%">
-            <input type="text" style="width:100%;text-align:left" v-model="keyword" :placeholder="$t('systemes.enterkeywordsearch')">
+          <div class="input-btn">
+            <input type="text" v-model="keyword" placeholder="输入关键词搜索">
           </div>
         </div>
       </div>
       <div class="date-box">
-        <span style="width:0.8rem">
-          <!-- 类型： -->
-          {{$t('systemes.type')}}
-          </span>
+        <span>类型：</span>
         <div>
           <div class="input-btn select-btn">
             <button class="selectBtn" :class="activeType==i.id?'activeType':''" v-for="(i,index) in selectInfo" v-bind:key="index" :data-name="i.name" @click="selectedBtn(i)">{{i.name}}</button>
@@ -24,50 +18,44 @@
         </div>
       </div>
       <div class="date-box">
-        <span style="width:0.8rem">
-          <!-- 状态： -->
-          {{$t('systemes.status')}}
-          </span>
+        <span>状态：</span>
         <div>
           <div class="input-btn select-btn">
             <button class="selectBtn" :class="selectStatus==i.id?'activeType':''" v-for="(i,index) in selectStatusInfo" v-bind:key="index" :data-name="i.name" @click="selectStatusBtn(i)">{{i.name}}</button>
           </div>
         </div>
-        <div class="search-btn" @click="toQuery">
-          <!-- 查询 -->
-          {{$t('systemes.query')}}
-          </div>
+        <div class="search-btn" @click="toQuery">查询</div>
       </div>
     </div>
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
         <el-table :data="data" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-          <el-table-column prop="username" :label="$t('systemes.username')" min-width="100" align="center"/>
-          <el-table-column style="color:red" prop="phone" :label="$t('systemes.phone')" min-width="120" align="center"/>
-          <el-table-column style="color:red" :show-overflow-tooltip="true" prop="email" :label="$t('systemes.mailbox')" min-width="120" align="center"/>
+          <el-table-column prop="username" label="用户名" min-width="100" align="center"/>
+          <el-table-column style="color:red" prop="phone" label="电话" min-width="120" align="center"/>
+          <el-table-column style="color:red" :show-overflow-tooltip="true" prop="email" label="邮箱" min-width="120" align="center"/>
           <!-- <el-table-column label="上级代理" min-width="180" align="center">
             <template slot-scope="scope">
               <div>{{ scope.row.dept.name }}</div>
             </template>
           </el-table-column> -->
-					<el-table-column :label="$t('systemes.usertype')" min-width="180" align="center">
+					<el-table-column label="用户类型" min-width="180" align="center">
 					  <template slot-scope="scope">
 					    <div>{{ scope.row.job.name }}</div>
 					  </template>
 					</el-table-column>
-					<el-table-column :label="$t('systemes.merchantidentification')" min-width="180" align="center">
+					<el-table-column label="商户标识" min-width="180" align="center">
 					  <template slot-scope="scope">
 					    <div>{{ scope.row.merchantId }}</div>
 					  </template>
 					</el-table-column>
-          <el-table-column :label="$t('systemes.status')" align="center" min-width="180" >
+          <el-table-column label="状态" align="center" min-width="180" >
             <template slot-scope="scope">
               <div v-for="item in dicts" :key="item.id">
                 <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag>
               </div>
             </template>
           </el-table-column>
-          <el-table-column :show-overflow-tooltip="true" prop="createTime" :label="$t('systemes.creationdate')" min-width="200" align="center">
+          <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建日期" min-width="200" align="center">
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
@@ -317,11 +305,11 @@ export default {
     /* margin-right: 30px; */
   }
   .activeType{
-    border: 1px solid #21BFFC;
+    border: 1px solid #21BFFC; 
     background: #0E1E4B;
   }
   .activeStatus{
-    border: 1px solid #21BFFC;
+    border: 1px solid #21BFFC; 
     background: #0E1E4B;
   }
   .p-box .search-box .date-box .date-picker .input-btn input{
@@ -458,7 +446,7 @@ export default {
     color: #fff;
     font-size: 24px !important;
   }
-
+  
   .el-table .cell .el-tag{
     width: 140px;
     height: 40px;
@@ -471,7 +459,6 @@ export default {
   }
   .el-table th>.cell, .el-table th div{
     display: flex;
-    justify-content: center;
 }
 .el-table td, .el-table th.is-leaf{
     border-bottom: 1px solid transparent !important;

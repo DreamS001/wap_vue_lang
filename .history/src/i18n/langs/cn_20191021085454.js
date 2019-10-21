@@ -75,14 +75,12 @@ const cn= {
     numberofpayers:'支付人数',
     paymentamount:'支付金额($)',
     // 用户管理
-    keyword:'关键词',
     enterkeywordsearch:'输入关键字搜索',
     type:'类型',
     status:'状态',
     username:'用户名',
     phone:'电话',
     mailbox:'邮箱',
-    query:'查询',
     usertype:'用户类型',
     merchantidentification:'商户标识',
     creationdate:'创建日期',
@@ -151,7 +149,7 @@ const cn= {
     reject:'驳回',
     reasons_for_remarks:'备注理由',
   },
-
+  
 }
 
 export default cn;

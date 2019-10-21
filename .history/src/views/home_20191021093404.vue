@@ -31,7 +31,7 @@
                           </div>
                         <div class="middle-m">
                           <div class="middle-m-d" :style="{width:dataTable.deviceNum/75 +'rem'}" style="background:rgba(255, 171, 79, 1);"></div>
-                          <div class="middle-right">{{earn.deviceNum}}{{$t('navbar.platform')}}</div>
+                          <div class="middle-right">{{earn.deviceNum}}台</div>
                         </div>
 
                       </div>
@@ -114,13 +114,10 @@
                     </div>
                     <div class="data-box">
                       <div class="item-middle">
-                        <div class="middle-left">
-                          <!-- 我的团队 -->
-                          {{$t('navbar.myteam')}}
-                          </div>
+                        <div class="middle-left">我的团队</div>
                         <div class="middle-m">
                           <div class="middle-m-d" :style="{width:dataTable.teamNum/75 +'rem'}" style="background:rgba(255, 171, 79, 1);"></div>
-                          <div class="middle-right">{{earn.teamNum}}{{$t('navbar.person')}}</div>
+                          <div class="middle-right">{{earn.teamNum}}人</div>
                         </div>
 
                       </div>
@@ -131,10 +128,7 @@
                   <div class="item">
                     <div class="item-top clearfix">
                       <div class="top-left clearfix">
-                        <span>
-                          <!-- 动态公告 -->
-                          {{$t('navbar.news')}}
-                          </span>
+                        <span>动态公告</span>
                         <img src="../assets/images/img_jianbian.png" alt="" srcset="" >
                         <!-- <div class="top-right" >
                            查看详情
@@ -157,10 +151,7 @@
           <div class="">
             <div class="world-box chart-wrapper">
               <div class="equipment">
-                <span>
-                  <!-- 设备分布 -->
-                  {{$t('navbar.eda')}}
-                  </span>
+                <span>设备分布</span>
                 <img src="../assets/images/img_jianbian.png" alt="" srcset="">
               </div>
               <div class="chart-wrapper mapp world-bottom">
@@ -169,10 +160,7 @@
                 </div>
                 <div class="data-boxs">
                   <div class="item-middle">
-                    <div class="middle-left">
-                      <!-- 交易总额 -->
-                      {{$t('navbar.gmv')}}
-                      </div>
+                    <div class="middle-left">交易总额</div>
                     <div class="middle-m">
                       <div class="middle-m-d" :style="{ width: dataList.trade_num/100000/75 + 'rem' }" style="background:rgba(255,171,79,1);" ></div>
                       <div class="middle-right">${{navdata.trade_num}}</div>
@@ -180,10 +168,7 @@
 
                   </div>
                   <div class="item-middle">
-                    <div class="middle-left">
-                      <!-- 交易笔数 -->
-                      {{$t('navbar.totaltransactions')}}
-                      </div>
+                    <div class="middle-left">交易笔数</div>
                     <div class="middle-m">
                       <div class="middle-m-d" :style="{ width: dataList.trade_amount/100000/75 + 'rem' }" style="background:#EC6941;"></div>
                       <div class="middle-right">{{navdata.trade_amount}}</div>
@@ -191,10 +176,7 @@
 
                   </div>
                   <div class="item-middle">
-                    <div class="middle-left">
-                      <!-- 总设备数 -->
-                      {{$t('navbar.totalnumberdevices')}}
-                      </div>
+                    <div class="middle-left">总设备数</div>
                     <div class="middle-m">
                       <div class="middle-m-d" :style="{ width: dataList.device_num/100000/75 + 'rem' }" style="background:#00AAFF;"></div>
                       <div class="middle-right">{{navdata.device_num}}</div>
@@ -202,10 +184,7 @@
 
                   </div>
                   <div class="item-middle">
-                    <div class="middle-left">
-                      <!-- 总投资 -->
-                      {{$t('navbar.totalinvestment')}}
-                      </div>
+                    <div class="middle-left">总投资</div>
                     <div class="middle-m">
                       <div class="middle-m-d" :style="{ width: dataList.total_investment/100000/75 + 'rem' }" style="background:#2BFAFF;"></div>
                       <div class="middle-right">${{navdata.total_investment}}</div>
@@ -221,18 +200,15 @@
         <div class="home-main home-main4">
           <div class="footer">
             <h5>
-              <span>
-                <!-- 联系我们 -->
-                {{$t('navbar.contactus')}}
-                </span>
+              <span>联系我们</span>
               <img src="../assets/images/img_jianbian.png" alt="" srcset="">
             </h5>
             <p>
               <!-- <span>电话客服:{{phone}}</span>
               <span>客服QQ:{{qq}}</span>
               <span>公司邮箱:{{email}}</span> -->
-              <span>{{$t('navbar.companyname')}}：{{name}}</span>
-              <span>{{$t('navbar.emailaccounts')}}：{{email}}</span>
+              <span>公司名称：{{name}}</span>
+              <span>邮箱账号：{{email}}</span>
               <!-- <span>Facebook账号：{{facebook}}</span> -->
             </p>
           </div>
@@ -240,18 +216,12 @@
         <div class="home-main home-main5">
           <div class="footer-two">
             <h5>
-              <span>
-                <!-- 推广链接 -->
-                {{$t('navbar.referrallinks')}}
-                </span>
+              <span>推广链接</span>
               <img src="../assets/images/img_jianbian.png" alt="" srcset="">
             </h5>
             <p>
               <span class="tg-url">{{Url}}</span>
-              <span class="copy" :data-clipboard-text="Url" @click="copyUrl">
-                <!-- 复制 -->
-                {{$t('navbar.copy')}}
-                </span>
+              <span class="copy" :data-clipboard-text="Url" @click="copyUrl">复制</span>
             </p>
           </div>
         </div>
