@@ -14,35 +14,35 @@
 				      <p>
 				        <span>
                   <!-- 金额： -->
-                  {{$t('products.money')}}：
+                  {{$t('products.money')}}
                   </span>
 				        <span>{{customPrice}}$</span>
 				      </p>
 				      <p>
 				        <span>
                   <!-- 周期： -->
-                  {{$t('products.period')}}：
+                  {{$t('products.period')}}
                   </span>
 				        <span>{{config.period}}{{$t('products.day')}}</span>
 				      </p>
 				      <p>
 				        <span>
                   <!-- 回报率： -->
-                  {{$t('products.rate_of_return')}}：
+                  {{$t('products.rate_of_returntian')}}
                   </span>
                 <span>130+%</span>
 				      </p>
               <p>
                 <span>
                   <!-- 收益分配： -->
-                  {{$t('products.income_distribution')}}：
+                  {{$t('products.income_distribution')}}
                   </span>
                 <span>200{{$t('products.day')}}</span>
               </p>
 				      <p class="input-box">
 				        <span class="num">
                   <!-- 数量： -->
-                  {{$t('products.quantity')}}：
+                  {{$t('products.quantity')}}
                   </span>
 				        <span>
 				            <el-input-number v-model="num" :min="1" :max="100" @change="countPrice" @focus="inputNum"></el-input-number>
@@ -83,7 +83,7 @@
 				      <p>
 				        <span>
                   <!-- 回报率 -->
-                  {{$t('products.rate_of_return')}}
+                  {{$t('products.rate_of_returntian')}}
                   ：</span>
                 <span>130+%</span>
 				      </p>
@@ -92,9 +92,7 @@
                   <!-- 收益分配 -->
                   {{$t('products.income_distribution')}}
                   ：</span>
-                <span>{{i.profit_distribute}}
-                  <!-- {{$t('products.day')}} -->
-                  </span>
+                <span>{{i.profit_distribute}}</span>
               </p>
 				      <p>
                 <span >
@@ -283,7 +281,7 @@ import { fptproduct } from '@/utils/i18n'
   /* 左边 */
   .bg{
     /* width:366px; */
-    width:345px;
+    width:366px;
     height: 400px;
     /* display: inline-block; */
     float: left;
@@ -294,7 +292,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   /* 右边 */
   .val{
-    width:384px;
+    width:363px;
     height: 100%;
     display: inline-block;
     padding-right:20px;
@@ -312,7 +310,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   .bg>h5{
     display:block;
-    width:235px;
+    width:228px;
     font-size:30px;
     font-family:PingFang SC;
     font-weight:500;

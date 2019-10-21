@@ -125,7 +125,7 @@ const en = {
       completed_order:'Completed order',
       purchase_failed:'Purchase failed',
       Equipment_to_be_allocated:'Equipment to be allocated',
-      product_amount:'Product amount（$）',
+      product_amount:'Product amount',
       serial_number:'serial number',
       member:'member',
       more:'more',

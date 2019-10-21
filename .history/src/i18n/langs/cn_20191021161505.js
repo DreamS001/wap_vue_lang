@@ -100,7 +100,6 @@ const cn= {
   },
   //产品
   products:{
-    //产品组合
     custom_product:'自定义产品',
     money:'金额',
     period:'周期',
@@ -117,20 +116,14 @@ const cn= {
     customize:'自定义',
     please_select_date:'请选择日期',
     to:'至',
-    reset:'重置',
+    to:'重置',
     query:'查询',
-    creationdate:'创建日期',
-    productname:'产品名称',
-    order_status:'订单状态',
-    purchase_succeeded:'购买成功',
-    completed_order:'已完成订单',
-    purchase_failed:'购买失败',
-    Equipment_to_be_allocated:'设备待分配',
-    product_amount:'产品金额（$）',
-    serial_number:'流水号',
-    member:'会员',
-    more:'更多',
-
+    //  购买记录
+    customize:'自定义',
+    please_select_date:'请选择日期',
+    to:'至',
+    to:'重置',
+    query:'查询',
   },
 
 

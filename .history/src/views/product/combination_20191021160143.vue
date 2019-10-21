@@ -312,7 +312,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   .bg>h5{
     display:block;
-    width:235px;
+    width:228px;
     font-size:30px;
     font-family:PingFang SC;
     font-weight:500;
