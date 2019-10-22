@@ -62,9 +62,11 @@
 					</el-table-column>
           <el-table-column :label="$t('systemes.status')" align="center" min-width="180" >
             <template slot-scope="scope">
-              <div v-for="item in dicts" :key="item.id">
+              <!-- <div v-for="item in dicts" :key="item.id">
                 <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag>
-              </div>
+              </div> -->
+              <el-tag v-if="scope.row.enabled.toString() === 'true'">{{$t('systemes.activation')}}</el-tag>
+              <el-tag v-else>{{$t('systemes.lock')}}</el-tag>
             </template>
           </el-table-column>
           <el-table-column :show-overflow-tooltip="true" prop="createTime" :label="$t('systemes.creationdate')" min-width="200" align="center">
@@ -96,6 +98,9 @@ import { getDepts } from '@/api/dept'
 import { getAll } from '@/api/role'
 import { getInfo } from '@/api/login'
 
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
+
 export default {
   mixins: [initData, initDict],
   data(){
@@ -124,6 +129,13 @@ export default {
       // 加载数据字典
       this.getDict('user_status')
     })
+    if(lang=='en'){
+      this.selectInfo=[{name:'All', key: '',id:0},{name:'User name',id:1,key:'username'},{name:"Mailbox",id:2,key:'email'}]
+      this.selectStatusInfo=[{name:'All', key: '',id:0},{name:'Activation', key: 'true',id:1},{name:"Lock", key: 'false',id:2}]
+    }else{
+      this.selectInfo=[{name:'全部', key: '',id:0},{name:'用户名',id:1,key:'username'},{name:"邮箱",id:2,key:'email'}]
+      this.selectStatusInfo=[{name:'全部', key: '',id:0},{name:'激活', key: 'true',id:1},{name:"锁定", key: 'false',id:2}]
+    }
   },
   methods: {
     parseTime,

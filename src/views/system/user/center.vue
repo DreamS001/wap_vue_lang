@@ -13,7 +13,7 @@
             <img v-if="user.avatar" :src="user.avatar" title="点击上传头像" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"/>
           </el-upload>
-          <span class="level-box">V1</span>
+          <span class="level-box">V{{ user.level }}</span>
         </div>
       </div>
       <div class="item">
@@ -23,7 +23,7 @@
       <div class="item">
         <div class="p-item item-left">{{$t('financeCash.account_level')}}</div>
         <div class="p-item item-right level" @click="showLevel">
-          V1
+          V{{ user.level }}
         </div>
       </div>
       <div class="item">

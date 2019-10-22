@@ -96,6 +96,8 @@ const cn= {
     usertype:'用户类型',
     merchantidentification:'商户标识',
     creationdate:'创建日期',
+    activation:'激活',
+    lock:'锁定',
 
 
 

@@ -1,6 +1,23 @@
 <template>
     <div class="header" id="NavBar">
-        <div class="logo" @click="refresh"></div>
+        <div class="left-box">
+            <div class="logo" @click="refresh"></div>
+            <div class="select-lang">
+                <img class="flag-img" :src="defaultImg" alt="">
+                <span class="xl-img"></span>
+                <div class="lang-box">
+                    <ul>
+                        <li v-for="(i,index) in langList" :key="index">
+                           <!-- <img class="flag-img" src="../../assets/images/img_en.png" alt="">  -->
+                           <img class="flag-img" :src="i.src" alt="" @click="getLang(i)" />
+                        </li>
+                        <!-- <li>
+                           <img class="flag-img" src="../../assets/images/img_cn.png" alt=""> 
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="right-box">
             
             <div>
@@ -31,7 +48,9 @@ export default {
     name: 'navBar',
     data(){
         return {
-            isShowSideBar:true
+            isShowSideBar:true,
+            defaultImg:require('../../assets/images/img_en.png'),
+            langList:[{id:1,src:require('../../assets/images/img_en.png')},{id:1,src:require('../../assets/images/img_cn.png')}]
         }
     },
     components:{
@@ -52,6 +71,9 @@ export default {
         },
         refresh(){
             location.reload();
+        },
+        getLang(e){
+            console.log(e)
         }
     },
 }
@@ -116,5 +138,46 @@ export default {
         height: 37px;
         background: url('../../assets/images/ic_home_daohang.png') no-repeat;
         background-size: 100% 100%;
+    }
+    .left-box{
+        display: flex;
+        align-items: center;
+    }
+    .select-lang {
+        margin-left: 50px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .select-lang .flag-img{
+        width: 60px;
+        height: 40px;
+    }
+    .select-lang .xl-img{
+        display: block;
+        width: 22px;
+        height: 12px;
+        background: url('../../assets/images/ic_home_top_xl.png') no-repeat;
+        background-size: 100% 100%;
+        margin-left: 20px;
+    }
+    .select-lang .lang-box{
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width:200px;
+        height:80px;
+        background:rgba(14,30,75,0.4);
+        border:1px solid rgba(33,191,252,1);
+        box-shadow:0px 0px 25px 0px rgba(0,138,255,0.4);
+        z-index: 999;
+    }
+    .select-lang .lang-box ul{
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
     }
 </style>
