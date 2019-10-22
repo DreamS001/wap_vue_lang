@@ -3,9 +3,9 @@
         <div class="left-box">
             <div class="logo" @click="refresh"></div>
             <div class="select-lang">
-                <img class="flag-img" :src="defaultImg" alt="">
+                <img class="flag-img" :src="defaultImg" alt="" @click="selectLang">
                 <span class="xl-img"></span>
-                <div class="lang-box">
+                <div class="lang-box" v-if="langPopup">
                     <ul>
                         <li v-for="(i,index) in langList" :key="index">
                            <!-- <img class="flag-img" src="../../assets/images/img_en.png" alt="">  -->
@@ -20,9 +20,9 @@
         </div>
         <div class="right-box">
             
-            <div>
+            <!-- <div>
                 <nx-lang-select class="international right-menu-item"></nx-lang-select>
-            </div>
+            </div> -->
 
             <div @click="userCenter" class="user-img">
                 <img :src="user.avatar">
@@ -44,13 +44,17 @@ import { mapGetters } from 'vuex'
 //语言选择
 import nxLangSelect from '@/components/nx-lang-select/index'
 import { fpthome } from '@/utils/i18n'// 国际化主题名字
+
+import {switchLang} from '@/api/login'
 export default {
     name: 'navBar',
     data(){
         return {
             isShowSideBar:true,
             defaultImg:require('../../assets/images/img_en.png'),
-            langList:[{id:1,src:require('../../assets/images/img_en.png')},{id:1,src:require('../../assets/images/img_cn.png')}]
+            langList:[{id:1,src:require('../../assets/images/img_en.png'),lang:'en'},{id:1,src:require('../../assets/images/img_cn.png'),lang:'zh'}],
+            newLang:'en_US',
+            langPopup:false,
         }
     },
     components:{
@@ -60,6 +64,19 @@ export default {
         ...mapGetters([
             'user',
         ]),
+        language() {
+            return this.$store.getters.language
+        }
+    },
+    created(){
+        console.log(this.$store.getters.language)
+        if(this.$store.getters.language=='en'){
+            this.defaultImg=require('../../assets/images/img_en.png')
+        }else if(this.$store.getters.language=='zh'){
+            this.defaultImg=require('../../assets/images/img_cn.png')
+        }else{
+            this.defaultImg=require('../../assets/images/img_en.png')
+        }
     },
     methods: {
         fpthome,
@@ -72,8 +89,35 @@ export default {
         refresh(){
             location.reload();
         },
+        selectLang(){
+            this.langPopup=true;
+        },
         getLang(e){
             console.log(e)
+            this.$i18n.locale = e.lang
+            this.$store.dispatch('setLanguage', e.lang)
+            if(e.lang=='zh'){
+                this.newLang='zh_CN'
+            }else{
+                this.newLang='en_US'
+            }
+            switchLang(this.newLang).then(res=>{
+                console.log(res)
+                if(res.code==200){
+                    this.$message({
+                        message: 'switch language success',
+                        type: 'success'
+                    })
+                    this.$router.go(0);
+                }else{
+                    this.$message({
+                        message: res.msg,
+                        type: 'success'
+                    })
+                }
+            })
+            this.defaultImg=e.src;
+            this.langPopup=false;
         }
     },
 }

@@ -12,16 +12,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        // target: 'http://shipz.jie360.com.cn',      //目标服务器,注意要到端口号
-        target: 'http://linf.jie360.com.cn',      //目标服务器,注意要到端口号
+        // target: 'http://investor.jie360.com.cn',      //目标服务器,注意要到端口号
+        target: 'https://wap.fptvip.com',      //目标服务器,注意要到端口号
+        // target: 'http://linf.jie360.com.cn',      //目标服务器,注意要到端口号
         changeOrigin: true,						//是否跨域
         pathRewrite: {
           '^/api': ''                                      //重写api使得 /api/login -> http://localhost:1337/login等等，这里好多csdn博主跟我的不一样，可能个人喜好问题，只要映射到相应的url就行了
         }
       },
       '/auth': {
-        // target: 'http://shipz.jie360.com.cn',      //目标服务器,注意要到端口号
-        target: 'http://linf.jie360.com.cn',      //目标服务器,注意要到端口号
+        target: 'https://wap.fptvip.com',      //目标服务器,注意要到端口号
+        // target: 'http://linf.jie360.com.cn',      //目标服务器,注意要到端口号
         changeOrigin: true,						//是否跨域
         pathRewrite: {
           '^/auth': ''                                      //重写api使得 /api/login -> http://localhost:1337/login等等，这里好多csdn博主跟我的不一样，可能个人喜好问题，只要映射到相应的url就行了
