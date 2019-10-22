@@ -13,7 +13,7 @@
           <el-button
             class="filter-item filter-btn"
             size="mini"
-            @click="changeExpand">{{ expand ? fold : expands }}</el-button>
+            @click="changeExpand">{{ $parent.expand ? '折叠' : '展开' }}</el-button>
         </div>
       </div>
       <div class="search-item">
@@ -38,19 +38,17 @@
           </el-table-column>
           <el-table-column :label="$t('systemes.sponsored_links')" align="center" min-width="200">
             <template slot-scope="scope">
-              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">{{$t('systemes.click_to_copy')}}</el-button>
+              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">点击复制</el-button>
             </template>
           </el-table-column>
           <el-table-column :label="$t('systemes.status')" align="center" min-width="200">
             <template slot-scope="scope">
-              <!-- <div v-for="item in dicts" :key="item.id">
+              <div v-for="item in dicts" :key="item.id">
                 <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag>
-              </div> -->
-              <el-tag v-if="scope.row.enabled.toString() === 'true'">{{$t('systemes.activation')}}</el-tag>
-              <el-tag v-else>{{$t('systemes.lock')}}</el-tag>
+              </div>
             </template>
           </el-table-column>
-          <el-table-column prop="createTime" :label="$t('systemes.creationdate')" min-width="200">
+          <el-table-column prop="createTime" :label="$t('systemes.status')" min-width="200">
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
@@ -71,16 +69,11 @@ import { del } from '@/api/dept'
 import { parseTime } from '@/utils/index'
 import { Toast } from 'mint-ui';
 import { systemes } from '@/utils/i18n'
-
-import  Cookies from 'js-cookie'
-var lang=Cookies.get('language') || 'en';
 export default {
   components: {  treeTable },
   mixins: [initData, initDict],
   data() {
     return {
-      fold:'fold',
-      expands:'expand',
       columns: [
         {
           text: '名称',
@@ -95,24 +88,6 @@ export default {
     }
   },
   created() {
-    if(lang=='en'){
-      this.columns=[{text:'name', value:'name'}]
-      this.enabledTypeOptions=[
-        { key: 'true', display_name: 'normal' },
-        { key: 'false', display_name: 'forbidden' }
-      ]
-      this.fold='fold'
-      this.expands='expand'
-
-    }else{
-      this.columns=[{text:'名称',value:'name'}]
-      this.enabledTypeOptions=[
-        { key: 'true', display_name: '正常' },
-        { key: 'false', display_name: '禁用' }
-      ]
-      this.fold='折叠'
-      this.expands='展开'
-    }
     this.$nextTick(() => {
       this.init()
       // 加载数据字典

@@ -106,7 +106,6 @@ const cn= {
     proxy_code:'代理编码',
     normal:'正常',
     sponsored_links:'禁用',
-    click_to_copy:'点击复制',
 
 
   },
@@ -177,7 +176,7 @@ const cn= {
   financeCash:{
     title_2:'动态钱包收益（$）',
     title_3:'静态钱包收益（$）',
-    customQuery:'自  定  义',
+    customQuery:'自定义',
     rest:'重置',
     recharge_amount:'充值金额（$）',
     withdrawal_amount:'提现金额（$）',
@@ -199,7 +198,7 @@ const cn= {
     ID:'交易ID',
     wallet_adress:'钱包地址',
 
-    serial_number :'流  水  号',
+    serial_number :'流水号',
     recharge_date:'充值日期',
     date_of_presentation:'提现日期',
     address:'地址',
@@ -254,20 +253,6 @@ const cn= {
     gold_member:'黄金会员',
     platinum_members:'铂金会员',
     diamond_member:'钻石会员',
-
-    transaction_amount1:'交易金额',
-    transaction_type:'交易类型',
-    trading_status:'交易状态',
-
-    input_amount:'输入金额',
-
-    cash_time:'提现时间',
-    audit_time:'审核时间',
-
-
-
-
-    logout:'退出'
 
   },
 

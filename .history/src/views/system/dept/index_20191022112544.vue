@@ -43,11 +43,11 @@
           </el-table-column>
           <el-table-column :label="$t('systemes.status')" align="center" min-width="200">
             <template slot-scope="scope">
-              <!-- <div v-for="item in dicts" :key="item.id">
-                <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag>
-              </div> -->
+              <div v-for="item in dicts" :key="item.id">
+                <!-- <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag> -->
               <el-tag v-if="scope.row.enabled.toString() === 'true'">{{$t('systemes.activation')}}</el-tag>
               <el-tag v-else>{{$t('systemes.lock')}}</el-tag>
+              </div>
             </template>
           </el-table-column>
           <el-table-column prop="createTime" :label="$t('systemes.creationdate')" min-width="200">
