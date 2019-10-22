@@ -96,8 +96,6 @@ const cn= {
     usertype:'用户类型',
     merchantidentification:'商户标识',
     creationdate:'创建日期',
-    activation:'激活',
-    lock:'锁定',
 
   },
   //产品
@@ -127,12 +125,23 @@ const cn= {
     purchase_succeeded:'购买成功',
     completed_order:'已完成订单',
     purchase_failed:'购买失败',
-    Equipment_to_be_allocated:'设备待分配',
-    product_amount:'产品金额（$）',
-    serial_number:'流水号',
-    member:'会员',
-    more:'更多',
+    creationdate:'设备待分配',
+    creationdate:'产品金额',
+    creationdate:'流水号',
+    creationdate:'会员',
+    creationdate:'更多',
 
+    creationdate:'Creation date',
+    productname:'product name',
+    order_status:'Order Status',
+    purchase_succeeded:'purchase succeeded',
+    completed_order:'Completed order',
+    purchase_failed:'Purchase failed',
+    creationdate:'设备待分配',
+    creationdate:'产品金额',
+    creationdate:'流水号',
+    creationdate:'会员',
+    creationdate:'更多',
   },
 
 

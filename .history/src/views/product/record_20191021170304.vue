@@ -432,7 +432,7 @@ export default {
     text-align: center;
     background: rgba(14, 30, 75, 1);
     border: 1px solid rgba(33, 191, 252, 1);
-    padding: 0 3px !important;
+    padding: 0 !important;
   }
   .el-table th>.cell, .el-table th div{
     display: flex;

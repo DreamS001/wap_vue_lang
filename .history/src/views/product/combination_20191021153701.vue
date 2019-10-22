@@ -14,35 +14,35 @@
 				      <p>
 				        <span>
                   <!-- 金额： -->
-                  {{$t('products.money')}}：
+                  {{$t('products.money')}}
                   </span>
 				        <span>{{customPrice}}$</span>
 				      </p>
 				      <p>
 				        <span>
                   <!-- 周期： -->
-                  {{$t('products.period')}}：
+                  {{$t('products.period')}}
                   </span>
 				        <span>{{config.period}}{{$t('products.day')}}</span>
 				      </p>
 				      <p>
 				        <span>
                   <!-- 回报率： -->
-                  {{$t('products.rate_of_return')}}：
+                  {{$t('products.rate_of_returntian')}}
                   </span>
                 <span>130+%</span>
 				      </p>
               <p>
                 <span>
                   <!-- 收益分配： -->
-                  {{$t('products.income_distribution')}}：
+                  {{$t('products.income_distribution')}}
                   </span>
-                <span>200{{$t('products.day')}}</span>
+                <span>200天</span>
               </p>
 				      <p class="input-box">
 				        <span class="num">
-                  <!-- 数量： -->
-                  {{$t('products.quantity')}}：
+                  数量：
+                  {{$t('products.quantity')}}
                   </span>
 				        <span>
 				            <el-input-number v-model="num" :min="1" :max="100" @change="countPrice" @focus="inputNum"></el-input-number>
@@ -50,11 +50,7 @@
 				      </p>
 				      <p >
                 <span></span>
-				        <span class="purchase" @click="contribut(1,i)">
-                  <!-- 购买 -->
-                  {{$t('products.buy')}}
-                  </span>
-
+				        <span class="purchase" @click="contribut(1,i)">购买</span>
 				      </p>
 				    </div>
 				  </div>
@@ -67,51 +63,31 @@
 				    </div>
 				    <div class="val">
 				      <p>
-				        <span>
-                  <!-- 金额 -->
-                  {{$t('products.money')}}
-                  ：</span>
+				        <span>金额：</span>
 				        <span>{{i.price}}$</span>
 				      </p>
 				      <p>
-				        <span>
-                  <!-- 周期 -->
-                  {{$t('products.period')}}
-                  ：</span>
-				        <span>{{i.period}}{{$t('products.day')}}</span>
+				        <span>周期：</span>
+				        <span>{{i.period}}天</span>
 				      </p>
 				      <p>
-				        <span>
-                  <!-- 回报率 -->
-                  {{$t('products.rate_of_return')}}
-                  ：</span>
+				        <span>回报率：</span>
                 <span>130+%</span>
 				      </p>
               <p>
-                <span>
-                  <!-- 收益分配 -->
-                  {{$t('products.income_distribution')}}
-                  ：</span>
-                <span>{{i.profit_distribute}}
-                  <!-- {{$t('products.day')}} -->
-                  </span>
+                <span>收益分配：</span>
+                <span>{{i.profit_distribute}}</span>
               </p>
 				      <p>
-                <span >
-                  <!-- 数量 -->
-                  {{$t('products.quantity')}}
-                  ：</span>
+                <span >数量：</span>
                 <span :key="i.id" >
                   <!-- <span :key="i.id" style="margin-right:4px;width:0;">{{i.num}}</span>台 -->
-                  {{i.num}} {{$t('products.desk')}}
+                  {{i.num}} 台
                 </span>
               </p>
 				      <p >
                 <span></span>
-				        <span class="purchase" @click="contribut(2,i)">
-                  <!-- 购买 -->
-                  {{$t('products.buy')}}
-                  </span>
+				        <span class="purchase" @click="contribut(2,i)">购买</span>
 				      </p>
 				    </div>
 				  </div>
@@ -122,26 +98,16 @@
 
     <div class="popup" v-if="recharge">
       <div class="popup-content">
-        <h5>
-          <!-- 购买 -->
-          {{$t('products.buy')}}
-          </h5>
+        <h5>购买</h5>
         <div class="close-icon" @click="closePopup"></div>
         <div class="popup-form">
           <div class="recharge-box">
-            <!-- 确认购买该产品吗？ -->
-            {{$t('products.confirm_purchase')}}
+            确认购买该产品吗？
           </div>
 
           <div class="btn-group">
-            <button class="sure-btn" @click="sureBtn">
-              <!-- 确认 -->
-              {{$t('products.determine')}}
-              </button>
-            <button class="sure-btn" @click="closePopup">
-              <!-- 取消 -->
-              {{$t('products.cancel')}}
-              </button>
+            <button class="sure-btn" @click="sureBtn">确认</button>
+            <button class="sure-btn" @click="closePopup">取消</button>
           </div>
         </div>
       </div>
@@ -283,7 +249,7 @@ import { fptproduct } from '@/utils/i18n'
   /* 左边 */
   .bg{
     /* width:366px; */
-    width:345px;
+    width:366px;
     height: 400px;
     /* display: inline-block; */
     float: left;
@@ -294,7 +260,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   /* 右边 */
   .val{
-    width:384px;
+    width:363px;
     height: 100%;
     display: inline-block;
     padding-right:20px;
@@ -312,7 +278,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   .bg>h5{
     display:block;
-    width:235px;
+    width:228px;
     font-size:30px;
     font-family:PingFang SC;
     font-weight:500;

@@ -15,7 +15,7 @@
             {{$t('products.to')}}
             </span>
           <div class="input-btn" @click="selectendDate">
-            <input type="text" readonly v-model="endDate" :placeholder="$t('products.please_select_date')">
+            <input type="text" readonly v-model="endDate" placeholder="$t('products.please_select_date')">
           </div>
         </div>
       </div>
@@ -30,46 +30,40 @@
     </div>
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
-        <el-table class="dulei" :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle" >
+        <el-table :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
           <el-table-column prop="create_time" :label="$t('products.creationdate')" min-width="180" align="center"/>
           <el-table-column style="color:red" prop="product_name" :label="$t('products.productname')" min-width="160" align="center"/>
           <el-table-column prop="order_status"  :label="$t('products.order_status')" min-width="160" align="center">
           <template slot-scope="scope">
               <el-tag type="success" v-if="scope.row.order_status==300">
-                <!-- 购买成功 -->
-               {{$t('products.purchase_succeeded')}}
+                购买成功
+
                 </el-tag>
               <el-tag type="success" v-if="scope.row.order_status==500">
-                <!-- 已完成订单 -->
-               {{$t('products.completed_order')}}
+                已完成订单
+
                 </el-tag>
               <el-tag type="danger"  v-if="scope.row.order_status==100" style="color:rgba(255, 65, 7, 1)">
-                <!-- 购买失败 -->
-               {{$t('products.purchase_failed')}}
+                购买失败
 
                 </el-tag>
               <el-tag  type="danger" v-if="scope.row.order_status==200" style="color:rgba(255, 65, 7, 1)">
-                <!-- 购买失败 -->
-               {{$t('products.purchase_failed')}}
+                购买失败
 
                 </el-tag>
               <el-tag type v-if="scope.row.order_status==400">
-                <!-- 设备待分配 -->
-               {{$t('products.Equipment_to_be_allocated')}}
+                设备待分配
 
                 </el-tag>
             </template>
           </el-table-column>
-          <el-table-column style="color:red" prop="product_amount" :label="$t('products.product_amount')" min-width="150" align="center"/>
-          <el-table-column style="color:red" prop="merchant_order_id" :label="$t('products.serial_number')" min-width="170" align="center"/>
-          <el-table-column style="color:red" prop="investor_name" :label="$t('products.member')" min-width="150" align="center"/>
+          <el-table-column style="color:red" prop="product_amount" label="产品金额（$）" min-width="150" align="center"/>
+          <el-table-column style="color:red" prop="merchant_order_id" label="流水号" min-width="170" align="center"/>
+          <el-table-column style="color:red" prop="investor_name" label="会员" min-width="150" align="center"/>
         </el-table>
       </div>
 
-      <button class="more-btn" @click="getMore">
-        <!-- 更多 -->
-        {{$t('products.more')}}
-        </button>
+      <button class="more-btn" @click="getMore">更多</button>
     </div>
   </div>
 </template>
@@ -425,14 +419,14 @@ export default {
     font-size: 24px !important;
   }
 
-  .dulei .cell .el-tag{
-    min-width: 140px;
+  .el-table .cell .el-tag{
+    width: 140px;
     height: 40px;
     line-height: 40px;
     text-align: center;
     background: rgba(14, 30, 75, 1);
     border: 1px solid rgba(33, 191, 252, 1);
-    padding: 0 3px !important;
+    padding: 0 !important;
   }
   .el-table th>.cell, .el-table th div{
     display: flex;

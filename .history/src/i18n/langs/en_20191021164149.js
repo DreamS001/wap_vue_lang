@@ -82,8 +82,6 @@ const en = {
       numberofpayments:'Number of payments',
       numberofpayers:'Number of payers',
       paymentamount:'Payment amount($)',
-      activation:'Activation',
-      lock:'Lock',
 
       //用户管理
       keyword:'Key words',

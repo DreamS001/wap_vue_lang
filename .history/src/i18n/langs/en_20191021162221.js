@@ -82,8 +82,6 @@ const en = {
       numberofpayments:'Number of payments',
       numberofpayers:'Number of payers',
       paymentamount:'Payment amount($)',
-      activation:'Activation',
-      lock:'Lock',
 
       //用户管理
       keyword:'Key words',
@@ -120,17 +118,6 @@ const en = {
       reset:'Reset',
       query:'query',
       creationdate:'Creation date',
-      creationdate:'Creation date',
-      productname:'product name',
-      order_status:'Order Status',
-      purchase_succeeded:'purchase succeeded',
-      completed_order:'Completed order',
-      purchase_failed:'Purchase failed',
-      Equipment_to_be_allocated:'Equipment to be allocated',
-      product_amount:'Product amount（$）',
-      serial_number:'serial number',
-      member:'member',
-      more:'more',
     },
     financeEarnings:{
       wallet:'Wallet',

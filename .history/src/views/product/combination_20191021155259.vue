@@ -283,7 +283,7 @@ import { fptproduct } from '@/utils/i18n'
   /* 左边 */
   .bg{
     /* width:366px; */
-    width:345px;
+    width:366px;
     height: 400px;
     /* display: inline-block; */
     float: left;
@@ -294,7 +294,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   /* 右边 */
   .val{
-    width:384px;
+    width:363px;
     height: 100%;
     display: inline-block;
     padding-right:20px;
@@ -312,7 +312,7 @@ import { fptproduct } from '@/utils/i18n'
   }
   .bg>h5{
     display:block;
-    width:235px;
+    width:228px;
     font-size:30px;
     font-family:PingFang SC;
     font-weight:500;
