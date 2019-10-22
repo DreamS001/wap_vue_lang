@@ -22,7 +22,7 @@ const cn= {
   // 导航栏
   navbar: {
     // 顶部导航栏
-    title: '欢迎光临',
+    title: '账号',
     personal:'个人中心',
     logout:'退出登录',
     // 顶部标签栏的对应的右击按钮

@@ -7,6 +7,22 @@
         <div class="container-main">
           <form action="">
             <div class="logo"></div>
+            <div class="lang-content">
+              <div class="select-lang">
+                <div @click="selectLang">
+                  <img class="flag-img" :src="defaultImg" alt="" >
+                  <span v-if="langPopup" class="xl-img"></span>
+                  <span v-else class="xl2-img"></span>
+                </div>
+                  <div class="lang-box" v-if="langPopup">
+                      <ul>
+                          <li v-for="(i,index) in langList" :key="index">
+                            <img class="flag-img" :src="i.src" alt="" @click="getLang(i)" />
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
             <div class="login-input"><input type="email" v-model="loginForm.username" :placeholder="$t('login.placeholder_username')"></div>
             <div class="login-input"><input type="password" v-model="loginForm.password" :placeholder="$t('login.placeholder_password')"></div>
             <div class="div-code" style=""><input class="login-code" type="text" v-model="loginForm.code" :placeholder="$t('login.VerificationCode')"><img :src="codeUrl" @click="getCode"></div>
@@ -34,12 +50,16 @@ export default {
         codeUrl: '',
         cookiePass: '',
         loginForm: {
-        username: '',
-        password: '',
-        rememberMe: false,
-        code: '',
-        uuid: ''
+          username: '',
+          password: '',
+          rememberMe: false,
+          code: '',
+          uuid: ''
         },
+        defaultImg:require('../assets/images/img_en.png'),
+        langList:[{id:1,src:require('../assets/images/img_en.png'),lang:'en'},{id:1,src:require('../assets/images/img_cn.png'),lang:'zh'}],
+        newLang:'en_US',
+        langPopup:false,
       }
   },
   watch: {
@@ -52,16 +72,47 @@ export default {
   },
   created() {
     if(Cookies.get('language')){
-      console.log('1111')
+      // console.log('1111')
       Cookies.remove('language')
     }else{
-      console.log('2222')
+      // console.log('2222')
     }
     this.getCode()
     this.getCookie()
   },
   methods:{
     login,
+    selectLang(){
+        this.langPopup=!this.langPopup;
+    },
+    getLang(e){
+      console.log(e)
+      this.$i18n.locale = e.lang
+      if(e.lang=='zh'){
+          this.newLang='zh_CN'
+      }else{
+          this.newLang='en_US'
+      }
+      switchLang(this.newLang).then(res=>{
+          console.log(res)
+          if(res.code==200){
+              this.$store.dispatch('setLanguage', e.lang)
+              Cookies.get('language',e.lang)
+              this.$message({
+                  message: 'switch language success',
+                  type: 'success'
+              })
+              // this.$router.go(0);
+          }else{
+              this.$message({
+                  message: res.msg,
+                  type: 'success'
+              })
+          }
+      })
+      this.defaultImg=e.src;
+      this.langPopup=false;
+    },
     getCode() {
       getCodeImg().then(res => {
         this.codeUrl = 'data:image/gif;base64,' + res.img
@@ -85,53 +136,100 @@ export default {
     handleLogin() {
       var reg=/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,}$/
       console.log('1111')
-      if (this.loginForm.username == "") {
-        Toast({
-          message: '请输入账号',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      } else if(this.loginForm.password==""){
-        Toast({
-          message: '请输入密码',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-      }
-      // else if(!reg.test(this.loginForm.password)){
-      //   Toast({
-      //     message: '密码至少6位，且需为字母数字混合',
-      //     duration: 3000,
-      //     iconClass: 'iconfont icon-jinggao'
-      //   });
-      // }
-      else if(this.loginForm.code==''){
-        Toast({
-          message: '请输入验证码',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+      if(this.newLang=='en_US'){
+        if (this.loginForm.username == "") {
+          Toast({
+            message: 'Please enter your account number',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if(this.loginForm.password==""){
+          Toast({
+            message: 'Please input a password',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
+        // else if(!reg.test(this.loginForm.password)){
+        //   Toast({
+        //     message: 'Password shall be at least 6 digits, and shall be alphanumeric',
+        //     duration: 3000,
+        //     iconClass: 'iconfont icon-jinggao'
+        //   });
+        // }
+        else if(this.loginForm.code==''){
+          Toast({
+            message: 'Please enter the verification code',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else{
+          const user = {
+            username: this.loginForm.username,
+            password: this.loginForm.password,
+            rememberMe: this.loginForm.rememberMe,
+            code: this.loginForm.code,
+            uuid: this.loginForm.uuid
+          }
+          if (user.password !== this.cookiePass) {
+            user.password = encrypt(user.password)
+          }
+          this.$store.dispatch('Login', user).then(() => {
+              // switchLang(this.newLang).then((res)=>{
+                
+              // })
+              this.$router.push({ path: this.redirect || '/' })
+          }).catch(() => {
+              this.getCode()
+          })
+        }
       }else{
-        const user = {
-          username: this.loginForm.username,
-          password: this.loginForm.password,
-          rememberMe: this.loginForm.rememberMe,
-          code: this.loginForm.code,
-          uuid: this.loginForm.uuid
+        if (this.loginForm.username == "") {
+          Toast({
+            message: '请输入账号',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        } else if(this.loginForm.password==""){
+          Toast({
+            message: '请输入密码',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
         }
-        if (user.password !== this.cookiePass) {
-          user.password = encrypt(user.password)
+        // else if(!reg.test(this.loginForm.password)){
+        //   Toast({
+        //     message: '密码至少6位，且需为字母数字混合',
+        //     duration: 3000,
+        //     iconClass: 'iconfont icon-jinggao'
+        //   });
+        // }
+        else if(this.loginForm.code==''){
+          Toast({
+            message: '请输入验证码',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else{
+          const user = {
+            username: this.loginForm.username,
+            password: this.loginForm.password,
+            rememberMe: this.loginForm.rememberMe,
+            code: this.loginForm.code,
+            uuid: this.loginForm.uuid
+          }
+          if (user.password !== this.cookiePass) {
+            user.password = encrypt(user.password)
+          }
+          this.$store.dispatch('Login', user).then(() => {
+              // switchLang(this.newLang).then((res)=>{
+                
+              // })
+              this.$router.push({ path: this.redirect || '/' })
+          }).catch(() => {
+              this.getCode()
+          })
         }
-        this.$store.dispatch('Login', user).then(() => {
-                // this.loading = false
-            switchLang('en_US').then((res)=>{
-              
-            })
-            this.$router.push({ path: this.redirect || '/' })
-        }).catch(() => {
-            // this.loading = false
-            this.getCode()
-        })
       }
     }
   }
@@ -185,6 +283,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
   }
   .logo{
     width:143px;
@@ -295,4 +394,60 @@ export default {
     text-align:right;
     font-size:26px;
   }
+
+.lang-content{
+  position: absolute;
+  right: 74px;
+  top: 118px;
+}
+  .select-lang {
+        margin-left: 50px;
+        position: relative;
+    }
+    .select-lang>div {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .select-lang .flag-img{
+        width: 60px;
+        height: 40px;
+    }
+    .select-lang .xl-img{
+        display: block;
+        width: 22px;
+        height: 12px;
+        background: url('../assets/images/ic_home_top_xl.png') no-repeat;
+        background-size: 100% 100%;
+        margin-left: 20px;
+    }
+    .select-lang .xl2-img{
+      display: block;
+      width: 22px;
+      height: 12px;
+      background: url('../assets/images/ic_home_top_xl2.png') no-repeat;
+      background-size: 100% 100%;
+      margin-left: 20px;
+    }
+    .select-lang .lang-box{
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width:160px;
+        height:80px;
+        background:rgba(14,30,75,0.4);
+        border:1px solid rgba(33,191,252,1);
+        box-shadow:0px 0px 25px 0px rgba(0,138,255,0.4);
+        z-index: 999;
+    }
+    .select-lang .lang-box ul{
+        height: 100%;
+        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
 </style>

@@ -11,12 +11,8 @@
                 <div class="lang-box" v-if="langPopup">
                     <ul>
                         <li v-for="(i,index) in langList" :key="index">
-                           <!-- <img class="flag-img" src="../../assets/images/img_en.png" alt="">  -->
                            <img class="flag-img" :src="i.src" alt="" @click="getLang(i)" />
                         </li>
-                        <!-- <li>
-                           <img class="flag-img" src="../../assets/images/img_cn.png" alt="">
-                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -49,6 +45,8 @@ import nxLangSelect from '@/components/nx-lang-select/index'
 import { fpthome } from '@/utils/i18n'// 国际化主题名字
 
 import {switchLang} from '@/api/login'
+
+import {baseUrlLang} from '@/utils/evnlang' //新增 2019.10.14
 export default {
     name: 'navBar',
     data(){
@@ -104,9 +102,9 @@ export default {
             }else{
                 this.newLang='en_US'
             }
-            switchLang(this.newLang).then(res=>{
+            this.axios.get(baseUrlLang+'/api/i18n?i18n_language='+this.newLang).then(res=>{
                 console.log(res)
-                if(res.code==200){
+                if(res.data.code==200){
                     this.$message({
                         message: 'switch language success',
                         type: 'success'
@@ -114,11 +112,41 @@ export default {
                     this.$router.go(0);
                 }else{
                     this.$message({
-                        message: res.msg,
+                        message: res.data.msg,
                         type: 'success'
                     })
                 }
             })
+            // this.axios.get('http://linf.jie360.com.cn/api/i18n?i18n_language='+this.newLang).then(res=>{
+            //     console.log(res)
+            //     if(res.code==200){
+            //         this.$message({
+            //             message: 'switch language success',
+            //             type: 'success'
+            //         })
+            //         this.$router.go(0);
+            //     }else{
+            //         this.$message({
+            //             message: res.msg,
+            //             type: 'success'
+            //         })
+            //     }
+            // })
+            // switchLang(this.newLang).then(res=>{
+            //     console.log(res)
+            //     if(res.code==200){
+            //         this.$message({
+            //             message: 'switch language success',
+            //             type: 'success'
+            //         })
+            //         this.$router.go(0);
+            //     }else{
+            //         this.$message({
+            //             message: res.msg,
+            //             type: 'success'
+            //         })
+            //     }
+            // })
             this.defaultImg=e.src;
             this.langPopup=false;
         }

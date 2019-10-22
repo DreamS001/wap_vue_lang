@@ -21,7 +21,7 @@ const en = {
     },
     // 导航栏
     navbar: {
-      title: 'Welcome',
+      title: 'Account number',
       personal:'personal center',
       logout:'log out',
       // 顶部标签栏的对应的右击按钮

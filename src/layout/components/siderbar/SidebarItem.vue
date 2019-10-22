@@ -45,6 +45,7 @@ import { generateTitle } from '@/utils/i18n'// 国际化主题名字
 
 import Cookies from 'js-cookie'
 var lang=Cookies.get('language') || 'en';
+import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
@@ -69,6 +70,14 @@ export default {
       onlyOneChild: null
     }
   },
+  computed: {
+    ...mapGetters([
+        'user',
+    ]),
+    language() {
+        return this.$store.getters.language
+    }
+  },
   methods: {
     generateTitle,
     hasOneShowingChild(children, parent) {
@@ -78,7 +87,7 @@ export default {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
-          if(lang=='en'){
+          if(this.$store.getters.language=='en'){
             if(item.meta.title=='首页'){
               console.log(item.meta.title)
               item.meta.title='Home'
