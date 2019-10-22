@@ -101,10 +101,8 @@ const en = {
       name:'name',
       proxy_code_search:'Enter the proxy code search',
       fold:'fold',
-      expand:'Expand',
       proxy_code:'Proxy code',
       sponsored_links:'sponsored links',
-      click_to_copy:'Click to copy',
     },
     //产品
     products:{

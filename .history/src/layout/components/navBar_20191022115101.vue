@@ -5,8 +5,8 @@
             <div class="select-lang">
               <div @click="selectLang">
                 <img class="flag-img" :src="defaultImg" alt="" >
-                <span v-if="langPopup" class="xl-img"></span>
-                <span v-else class="xl2-img"></span>
+                <span class="xl-img"></span>
+                <span class="xl2-img"></span>
               </div>
                 <div class="lang-box" v-if="langPopup">
                     <ul>
@@ -213,12 +213,12 @@ export default {
         margin-left: 20px;
     }
     .select-lang .xl2-img{
-      display: block;
-      width: 22px;
-      height: 12px;
-      background: url('../../assets/images/ic_home_top_xl2.png') no-repeat;
-      background-size: 100% 100%;
-      margin-left: 20px;
+    display: block;
+    width: 12px;
+    height: 22px;
+    background: url('../../assets/images/ic_home_top_xl.png') no-repeat;
+    background-size: 100% 100%;
+    margin-left: 20px;
     }
     .select-lang .lang-box{
         position: absolute;

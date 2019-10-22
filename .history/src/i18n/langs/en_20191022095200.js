@@ -104,7 +104,6 @@ const en = {
       expand:'Expand',
       proxy_code:'Proxy code',
       sponsored_links:'sponsored links',
-      click_to_copy:'Click to copy',
     },
     //产品
     products:{

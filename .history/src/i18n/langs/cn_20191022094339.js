@@ -102,11 +102,11 @@ const cn= {
     name:'名称',
     proxy_code_search:'输入代理编码搜索',
     fold:'折叠',
-    expand:'展开',
+    fold:'展开',
     proxy_code:'代理编码',
-    normal:'正常',
-    sponsored_links:'禁用',
-    click_to_copy:'点击复制',
+    sponsored_links:'推广链接',
+
+
 
 
   },

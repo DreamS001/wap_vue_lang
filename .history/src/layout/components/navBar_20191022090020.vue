@@ -3,11 +3,8 @@
         <div class="left-box">
             <div class="logo" @click="refresh"></div>
             <div class="select-lang">
-              <div @click="selectLang">
-                <img class="flag-img" :src="defaultImg" alt="" >
-                <span v-if="langPopup" class="xl-img"></span>
-                <span v-else class="xl2-img"></span>
-              </div>
+                <img class="flag-img" :src="defaultImg" alt="" @click="selectLang">
+                <span class="xl-img"></span>
                 <div class="lang-box" v-if="langPopup">
                     <ul>
                         <li v-for="(i,index) in langList" :key="index">
@@ -15,14 +12,14 @@
                            <img class="flag-img" :src="i.src" alt="" @click="getLang(i)" />
                         </li>
                         <!-- <li>
-                           <img class="flag-img" src="../../assets/images/img_cn.png" alt="">
+                           <img class="flag-img" src="../../assets/images/img_cn.png" alt=""> 
                         </li> -->
                     </ul>
                 </div>
             </div>
         </div>
         <div class="right-box">
-
+            
             <!-- <div>
                 <nx-lang-select class="international right-menu-item"></nx-lang-select>
             </div> -->
@@ -33,7 +30,7 @@
             <div class="user-name">
                 <!-- <span>账号</span>
                 <span>{{user.username}}</span> -->
-
+                
                 <span>{{$t('navbar.title')}}</span>
                 <span>{{user.username}}</span>
             </div>
@@ -93,7 +90,7 @@ export default {
             location.reload();
         },
         selectLang(){
-            this.langPopup=!this.langPopup;
+            this.langPopup=true;
         },
         getLang(e){
             console.log(e)
@@ -192,14 +189,10 @@ export default {
     }
     .select-lang {
         margin-left: 50px;
-        position: relative;
-    }
-    .select-lang>div {
         display: flex;
         align-items: center;
-
+        position: relative;
     }
-
     .select-lang .flag-img{
         width: 60px;
         height: 40px;
@@ -212,20 +205,12 @@ export default {
         background-size: 100% 100%;
         margin-left: 20px;
     }
-    .select-lang .xl2-img{
-      display: block;
-      width: 22px;
-      height: 12px;
-      background: url('../../assets/images/ic_home_top_xl2.png') no-repeat;
-      background-size: 100% 100%;
-      margin-left: 20px;
-    }
     .select-lang .lang-box{
         position: absolute;
         bottom: -100px;
         left: 50%;
         transform: translateX(-50%);
-        width:160px;
+        width:200px;
         height:80px;
         background:rgba(14,30,75,0.4);
         border:1px solid rgba(33,191,252,1);
@@ -234,7 +219,6 @@ export default {
     }
     .select-lang .lang-box ul{
         height: 100%;
-        width:100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;

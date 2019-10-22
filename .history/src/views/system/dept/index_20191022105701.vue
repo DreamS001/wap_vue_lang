@@ -13,7 +13,7 @@
           <el-button
             class="filter-item filter-btn"
             size="mini"
-            @click="changeExpand">{{ expand ? fold : expands }}</el-button>
+            @click="changeExpand">{{ $parent.expand ? flod : '展开' }}</el-button>
         </div>
       </div>
       <div class="search-item">
@@ -38,16 +38,14 @@
           </el-table-column>
           <el-table-column :label="$t('systemes.sponsored_links')" align="center" min-width="200">
             <template slot-scope="scope">
-              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">{{$t('systemes.click_to_copy')}}</el-button>
+              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">点击复制</el-button>
             </template>
           </el-table-column>
           <el-table-column :label="$t('systemes.status')" align="center" min-width="200">
             <template slot-scope="scope">
-              <!-- <div v-for="item in dicts" :key="item.id">
+              <div v-for="item in dicts" :key="item.id">
                 <el-tag v-if="scope.row.enabled.toString() === item.value" :type="scope.row.enabled ? '' : 'info'">{{ item.label }}</el-tag>
-              </div> -->
-              <el-tag v-if="scope.row.enabled.toString() === 'true'">{{$t('systemes.activation')}}</el-tag>
-              <el-tag v-else>{{$t('systemes.lock')}}</el-tag>
+              </div>
             </template>
           </el-table-column>
           <el-table-column prop="createTime" :label="$t('systemes.creationdate')" min-width="200">
@@ -80,7 +78,7 @@ export default {
   data() {
     return {
       fold:'fold',
-      expands:'expand',
+      expand:'expand',
       columns: [
         {
           text: '名称',
@@ -102,7 +100,7 @@ export default {
         { key: 'false', display_name: 'forbidden' }
       ]
       this.fold='fold'
-      this.expands='expand'
+      this.expand='expand'
 
     }else{
       this.columns=[{text:'名称',value:'name'}]
@@ -111,7 +109,7 @@ export default {
         { key: 'false', display_name: '禁用' }
       ]
       this.fold='折叠'
-      this.expands='展开'
+      this.expand='展开'
     }
     this.$nextTick(() => {
       this.init()

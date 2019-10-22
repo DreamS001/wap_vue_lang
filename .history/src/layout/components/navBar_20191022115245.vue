@@ -214,9 +214,9 @@ export default {
     }
     .select-lang .xl2-img{
       display: block;
-      width: 22px;
-      height: 12px;
-      background: url('../../assets/images/ic_home_top_xl2.png') no-repeat;
+      width: 12px;
+      height: 22px;
+      background: url('../../assets/images/ic_home_top_xl.png') no-repeat;
       background-size: 100% 100%;
       margin-left: 20px;
     }
