@@ -115,7 +115,7 @@ const en = {
       cancel:'cancel',
       //  购买记录
       customize:'customize',
-      please_select_date:'Please select date',
+      please_select_date:'Select a date',
       to:'to',
       reset:'Reset',
       query:'query',
@@ -239,6 +239,20 @@ const en = {
       gold_member:'Gold member',
       platinum_members:'Platinum members',
       diamond_member:'Diamond member',
+
+     
+      transaction_amount1:'Transaction amount',
+      transaction_type:'Transaction type',
+      trading_status:'Trading status',
+
+      input_amount:'Input amount',
+
+      cash_time:'Cash withdrawal time',
+      audit_time:'Audit time',
+
+
+
+      logout:'Sign out'
     },
     route:{
       home:'Home'

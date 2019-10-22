@@ -12,7 +12,8 @@
           </div>
           <span>
             <!-- 至 -->
-            {{$t('products.to')}}
+            <!-- {{$t('products.to')}} -->
+            -
             </span>
           <div class="input-btn" @click="selectendDate">
             <input type="text" readonly v-model="endDate" :placeholder="$t('products.please_select_date')">
@@ -79,6 +80,9 @@ import '../../utils/screen'
 import { record, recordQuery } from '@/api/produc'
 import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -126,21 +130,40 @@ export default {
     },
     searchData(){
       this.pageNo=1
-      if(this.beginDate !='' &&this.endDate==''){
-        Toast({
-          message: '请选择结束时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
-      }
-      if(this.beginDate =='' &&this.endDate !=''){
-        Toast({
-          message: '请选择开始时间',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
-        return false
+      if(lang=='en'){
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: 'Please select the end time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: 'Please select a start time',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+      }else{
+        if(this.beginDate !='' &&this.endDate==''){
+          Toast({
+            message: '请选择结束时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
+        if(this.beginDate =='' &&this.endDate !=''){
+          Toast({
+            message: '请选择开始时间',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+          return false
+        }
       }
       this.list=[]
       this.request();
@@ -169,11 +192,19 @@ export default {
         //   message: "没有更多了",
         //   type: "none"
         // });
-        Toast({
-          message: '没有更多了',
-          duration: 3000,
-          iconClass: 'iconfont icon-jinggao'
-        });
+        if(lang=='en'){
+            Toast({
+              message: 'No more',
+              duration: 3000,
+              iconClass: 'iconfont icon-jinggao'
+            });
+        }else{
+          Toast({
+            message: '没有更多了',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }
         return false
       }
       this.request();
@@ -287,21 +318,25 @@ export default {
     text-align: center;
   }
   .p-box .search-box .search-btn{
-    width: 140px;
+    /* width: 140px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
     color: rgba(43, 250, 255, 1);
+    padding: 0 10px;
+    box-sizing: border-box;
   }
   .p-box .search-box .rest-btn{
-    width: 58px;
+    /* width: 58px; */
     height: 40px;
     border: 1px solid rgba(33, 191, 252, 1);
     background: rgba(14, 30, 75, 1);
     text-align: center;
     line-height: 40px;
+    padding: 0 10px;
+    box-sizing: border-box;
     color: rgba(43, 250, 255, 1);
   }
   .more-btn,.ck-btn{

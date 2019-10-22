@@ -4,7 +4,7 @@
         <nav-bar @transfer="showBtn" />
     </div>
     <div class="sidebar" v-show="isShowSideBar">
-      <div class="logout" @click="logoutBtn">退出</div>
+      <div class="logout" @click="logoutBtn">{{$t('financeCash.logout')}}</div>
       <div class="close-btn" @click="closeBtn"></div>
       <side-bar />
     </div>
@@ -20,6 +20,8 @@ import navBar from './components/navBar.vue'
 import sideBar from './components/siderbar/index.vue'
 import { MessageBox } from 'mint-ui';
 import { mapGetters } from 'vuex'
+import Cookies from 'js-cookie'
+import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
 export default {
     name: 'Layout',
     components: {
@@ -35,12 +37,16 @@ export default {
     computed: {
       ...mapGetters([
         'user'
-      ])
+      ]),
+      language() {
+          return this.$store.getters.language
+      }
     },
     watch: {
       '$route':'getPath'
     },
     methods:{
+      financeCash,
       getPath(){
         this.isShowSideBar=false
         // console.log(this.$route.path);
@@ -57,19 +63,33 @@ export default {
         // MessageBox.confirm('确定执行此操作?').then(action => {
         //   this.logout()
         // });
-        this.$confirm('确定注销并退出系统吗？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.logout()
-        }).catch(err=>{
-          console.log(err)
-        })
+        if(this.$store.getters.language=='en'){
+            this.$confirm('Are you sure you want to log off and exit the system?', 'Tips', {
+              confirmButtonText: 'Sure',
+              cancelButtonText: 'Cancel',
+              type: 'warning'
+            }).then(() => {
+              this.logout()
+            }).catch(err=>{
+              console.log(err)
+            })
+        }else{
+          this.$confirm('确定注销并退出系统吗？', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.logout()
+          }).catch(err=>{
+            console.log(err)
+          })
+        }
       },
       logout() {
         this.isShowSideBar=false
         this.$store.dispatch('LogOut').then(() => {
+          this.$store.dispatch('setLanguage', 'en')
+          Cookies.remove('language')
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
       },

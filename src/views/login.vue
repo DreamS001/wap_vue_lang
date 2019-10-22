@@ -21,7 +21,7 @@
 import '../utils/screen'
 import { encrypt } from '@/utils/rsaEncrypt'
 import Config from '@/config'
-import { getCodeImg } from '@/api/login'
+import { getCodeImg,switchLang } from '@/api/login'
 import Cookies from 'js-cookie'
 import { Toast } from 'mint-ui';
 
@@ -51,6 +51,12 @@ export default {
     }
   },
   created() {
+    if(Cookies.get('language')){
+      console.log('1111')
+      Cookies.remove('language')
+    }else{
+      console.log('2222')
+    }
     this.getCode()
     this.getCookie()
   },
@@ -118,6 +124,9 @@ export default {
         }
         this.$store.dispatch('Login', user).then(() => {
                 // this.loading = false
+            switchLang('en_US').then((res)=>{
+              
+            })
             this.$router.push({ path: this.redirect || '/' })
         }).catch(() => {
             // this.loading = false
