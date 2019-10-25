@@ -296,14 +296,22 @@ export default {
     //提现
     goPresentation(){
       this.presentation=true;
+      if(lang=='en'){
+        this.buttonName='Get verification code'
+      }else{
+        this.buttonName='获取验证码'
+      }
     },
     //获取邮箱验证码
     getCode(){
+          console.log(lang)
       if(lang=='en'){
           if (this.user.email) {
+            
+          console.log('2222')
           this.buttonName = 'Verification code sending'
           const _this = this
-          getEmailCode().then(res => {
+          getEmailCode(1).then(res => {
             console.log(res);
             if(res.code==200){
               Toast({
@@ -338,9 +346,10 @@ export default {
         }
       }else{
         if (this.user.email) {
+          console.log('111111')
           this.buttonName = '验证码发送中'
           const _this = this
-          getEmailCode().then(res => {
+          getEmailCode(1).then(res => {
             console.log(res);
             if(res.code==200){
               Toast({
@@ -396,6 +405,13 @@ export default {
           // that.$message.error("输入金额必须大于零");
           Toast({
             message: 'Input amount must be greater than zero',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else if(this.orderWithdraw.amount <20){
+          // that.$message.error("输入金额必须大于零");
+          Toast({
+            message: 'Minimum 20$',
             duration: 3000,
             iconClass: 'iconfont icon-jinggao'
           });
@@ -470,6 +486,13 @@ export default {
           // this.$message.error("提现额度不能大于总额度");
           Toast({
             message: '提现额度不能大于总额度',
+            duration: 3000,
+            iconClass: 'iconfont icon-jinggao'
+          });
+        }else if(this.orderWithdraw.amount <20){
+          // that.$message.error("输入金额必须大于零");
+          Toast({
+            message: '最低20$起',
             duration: 3000,
             iconClass: 'iconfont icon-jinggao'
           });

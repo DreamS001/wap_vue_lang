@@ -19,7 +19,7 @@
     <div class="data-box">
       <div style="width:100%!important;margin-top:20px">
         <el-table :data="list" :header-row-class-name="handlemyclass"  style="width: 100%!important" :row-class-name="setClassName" :cell-style="finalCellStyle">
-          <el-table-column prop="date" :label="$t('financeCash.date')" min-width="180" align="center"/>
+          <el-table-column prop="create_time" :label="$t('financeCash.date')" min-width="180" align="center"/>
           <el-table-column style="color:red" prop="act_profit" :label="$t('financeCash.title_2')" min-width="160" align="center"/>
           <el-table-column style="color:red" prop="device_expend" :label="$t('financeCash.robot_ex')" min-width="160" align="center"/>
           <el-table-column style="color:red" prop="cash_withdraw" :label="$t('financeCash.cash_with')" min-width="150" align="center"/>
@@ -47,7 +47,7 @@
             height="270"
             :row-class-name="setClassName"
           >
-            <el-table-column prop="date" :label="$t('financeCash.date')" min-width="100" align="center"/>
+            <el-table-column prop="create_time" :label="$t('financeCash.date')" min-width="100" align="center"/>
             <el-table-column prop="act_profit" :label="$t('financeCash.title_2')" min-width="160" align="center"/>
             <el-table-column prop="device_expend" :label="$t('financeCash.robot_ex')" min-width="170" align="center"/>
             <el-table-column prop="cash_withdraw" :label="$t('financeCash.cash_with')" min-width="170" align="center"/>
@@ -66,6 +66,8 @@ import { cash, cashlist, cashquery } from '@/api/finance'
 import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
 import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
+import moment from 'moment'
+
 
 import Cookies from 'js-cookie'
 var lang=Cookies.get('language') || 'en';
@@ -162,6 +164,9 @@ export default {
           // this.list = this.list.concat(eval(res.list))
           // this.total = res.total
           if(res.code==200){
+            res.data.list.forEach((v,i) => {
+              res.data.list[i].create_time = moment(res.data.list[i].create_time).format("YYYY-MM-DD hh:mm:ss");
+            });
             this.list = this.list.concat(eval(res.data.list))
             this.total = res.data.total
           }else{

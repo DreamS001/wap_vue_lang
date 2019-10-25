@@ -38,7 +38,8 @@
           </el-table-column>
           <el-table-column :label="$t('systemes.sponsored_links')" align="center" min-width="200">
             <template slot-scope="scope">
-              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">{{$t('systemes.click_to_copy')}}</el-button>
+              <!-- <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'http://investor.jie360.com.cn/register/?key='+scope.row.registerUrl" @click="copyUrl">{{$t('systemes.click_to_copy')}}</el-button> -->
+              <el-button size="mini" class="copy" data-clipboard-action="copy" :data-clipboard-text="'https://wap.fptvip.com/register/?key='+scope.row.registerUrl" @click="copyUrl">{{$t('systemes.click_to_copy')}}</el-button>
             </template>
           </el-table-column>
           <el-table-column :label="$t('systemes.status')" align="center" min-width="200">
@@ -74,6 +75,8 @@ import { systemes } from '@/utils/i18n'
 
 import  Cookies from 'js-cookie'
 var lang=Cookies.get('language') || 'en';
+
+import {baseUrlLang} from '@/utils/evnlang' //新增 2019.10.14
 export default {
   components: {  treeTable },
   mixins: [initData, initDict],
@@ -91,7 +94,7 @@ export default {
         { key: 'true', display_name: '正常' },
         { key: 'false', display_name: '禁用' }
       ],
-      delLoading: false, expand: true
+      delLoading: false, expand: true,
     }
   },
   created() {
@@ -116,7 +119,7 @@ export default {
     this.$nextTick(() => {
       this.init()
       // 加载数据字典
-      this.getDict('dept_status')
+      // this.getDict('dept_status')  //2019/10/23  17:35 注掉,国际化时接口报错
     })
   },
   methods: {
@@ -146,19 +149,35 @@ export default {
 			// 	 message:'复制成功!',
 			// 	 type:'success'
       //  })
+      if(lang=='en'){
+        Toast({
+          message: 'copy success',
+          duration: 3000,
+          iconClass: 'iconfont icon-cs-cg-1'
+        });
+      }else{
         Toast({
           message: '复制成功',
           duration: 3000,
           iconClass: 'iconfont icon-cs-cg-1'
         });
+      }
      });
      clipboard.on('error', function () {
         // _this.$message.error("复制失败!")
-        Toast({
-          message: '复制失败',
-          duration: 3000,
-          iconClass: 'iconfont icon-cs-sb-1'
-        });
+        if(lang=='en'){
+          Toast({
+            message: 'copy failed',
+            duration: 3000,
+            iconClass: 'iconfont icon-cs-sb-1'
+          });
+        }else{
+          Toast({
+            message: '复制失败',
+            duration: 3000,
+            iconClass: 'iconfont icon-cs-sb-1'
+          });
+        }
      });
     },
     setClassName({row, rowIndex}) {

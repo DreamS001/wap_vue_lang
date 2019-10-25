@@ -55,6 +55,8 @@ const en = {
       // 推广链接块
       referrallinks:'Referral Links',
       copy:'copy',
+
+      news_details:'News Details'
     },
     sidebar:{
       home:'home',
@@ -155,6 +157,8 @@ const en = {
       recharge:'Recharge',
       sure:'Sure',
       cancel:'Cancel',
+      next:'Next',
+      prver:'Previous step',
       email:'Email',
       cash_amount:'Cash withdrawal amount',
       cash_adress:'Cash address',
@@ -163,7 +167,7 @@ const en = {
       jy_number:'Transaction number',
       VerificationCode:'Verification Code',
       no_more:'Cannot be greater than the total quota',
-      input_pl_1:'Please enter the amount',
+      input_pl_1:'Please enter the amount and Minimum 20$',
       input_pl_2:'Please enter withdrawal address',
       input_pl_3:'Please enter notes',
       input_pl_4:'Please enter transaction No',
@@ -258,6 +262,14 @@ const en = {
       cash_time:'Cash withdrawal time',
       audit_time:'Audit time',
 
+      transfer_time:'Transfer time',
+      account_other_party:'Account of the other party',
+      transfer_amount:'Transfer amount($)',
+      transfer_amount1:'Transfer amount',
+
+      dfzh:'Please enter the opposite account',
+      zzje:'Please enter the transfer amount',
+      transfer:'Transfer',
 
 
       logout:'Sign out'

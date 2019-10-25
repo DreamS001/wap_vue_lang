@@ -56,6 +56,8 @@ const cn= {
     // 推广链接块
     referrallinks:'推广链接',
     copy:'复制',
+
+    news_details:'公告详情'
   },
   home:{
     home:'首页',
@@ -161,6 +163,8 @@ const cn= {
     recharge:'充值',
     sure:'确定',
     cancel:'取消',
+    next:'下一步',
+    prver:'上一步',
     email:'邮箱',
     cash_amount:'提现金额',
     cash_adress:'提现地址',
@@ -169,7 +173,7 @@ const cn= {
     jy_number:'交易单号',
     VerificationCode:'验证码',
     no_more:'不能大于总额度',
-    input_pl_1:'请输入金额（提现额度不能大于总额）',
+    input_pl_1:'请输入金额（提现额度不能大于总额,且最低20$起）',
     input_pl_2:'请输入提现地址',
     input_pl_3:'请输入备注内容',
     input_pl_4:'请输入交易单号',
@@ -263,6 +267,16 @@ const cn= {
 
     cash_time:'提现时间',
     audit_time:'审核时间',
+
+    transfer_time:'转账时间',
+    account_other_party:'对方账号',
+    transfer_amount:'转账金额（$）',
+    transfer_amount1:'转账金额',
+
+    dfzh:'请输入对方账户',
+    zzje:'请输入转账金额',
+
+    transfer:'转账',
 
 
 

@@ -88,28 +88,41 @@ export default {
     getLang(e){
       console.log(e)
       this.$i18n.locale = e.lang
+      console.log(e.lang)
+      
+      this.$store.dispatch('setLanguage', e.lang)
+      Cookies.set('language',e.lang)
       if(e.lang=='zh'){
-          this.newLang='zh_CN'
+          this.newLang='zh_CN',
+          this.$message({
+              message: '语言切换成功',
+              type: 'success'
+          })
       }else{
-          this.newLang='en_US'
+          this.newLang='en_US',
+          this.$message({
+              message: 'switch language success',
+              type: 'success'
+          })
       }
-      switchLang(this.newLang).then(res=>{
-          console.log(res)
-          if(res.code==200){
-              this.$store.dispatch('setLanguage', e.lang)
-              Cookies.get('language',e.lang)
-              this.$message({
-                  message: 'switch language success',
-                  type: 'success'
-              })
-              // this.$router.go(0);
-          }else{
-              this.$message({
-                  message: res.msg,
-                  type: 'success'
-              })
-          }
-      })
+      
+      // switchLang(this.newLang).then(res=>{
+      //     console.log(res)
+      //     if(res.code==200){
+      //         this.$store.dispatch('setLanguage', e.lang)
+      //         Cookies.set('language',e.lang)
+      //         this.$message({
+      //             message: 'switch language success',
+      //             type: 'success'
+      //         })
+      //         // this.$router.go(0);
+      //     }else{
+      //         this.$message({
+      //             message: res.msg,
+      //             type: 'success'
+      //         })
+      //     }
+      // })
       this.defaultImg=e.src;
       this.langPopup=false;
     },

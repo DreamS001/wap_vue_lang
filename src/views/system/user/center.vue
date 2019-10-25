@@ -13,7 +13,11 @@
             <img v-if="user.avatar" :src="user.avatar" title="点击上传头像" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"/>
           </el-upload>
-          <span class="level-box">V{{ user.level }}</span>
+          <!-- <span class="level-box">V{{ user.level }}</span> -->
+          <span class="level-box" v-if="user.level==0" style="border: 1px solid #00FFFF;color:#00FFFF;">V{{user.level}}</span>
+          <span class="level-box" v-else-if="user.level==1" style="border: 1px solid #FEFA24;color:#FEFA24;">V{{user.level}}</span>
+          <span class="level-box" v-else-if="user.level==2" style="border: 1px solid #D3D4D5;color:#D3D4D5;">V{{user.level}}</span>
+          <span class="level-box" v-else style="border: 1px solid #D5A6F9;color:#D5A6F9;">V{{user.level}}</span>
         </div>
       </div>
       <div class="item">
@@ -22,9 +26,13 @@
       </div>
       <div class="item">
         <div class="p-item item-left">{{$t('financeCash.account_level')}}</div>
-        <div class="p-item item-right level" @click="showLevel">
+        <!-- <div class="p-item item-right level" @click="showLevel">
           V{{ user.level }}
-        </div>
+        </div> -->
+        <div class="p-item item-right level" @click="showLevel" v-if="user.level==0" style="color:#00FFFF;">V{{user.level}}</div>
+        <div class="p-item item-right level" @click="showLevel" v-else-if="user.level==1" style="color:#FEFA24;">V{{user.level}}</div>
+        <div class="p-item item-right level" @click="showLevel" v-else-if="user.level==2" style="color:#D3D4D5;">V{{user.level}}</div>
+        <div class="p-item item-right level" @click="showLevel" v-else style="color:#D5A6F9;">V{{user.level}}</div>
       </div>
       <div class="item">
         <div class="p-item item-left">{{$t('financeCash.phone_number')}}</div>

@@ -90,11 +90,8 @@
               <p>
                 <span>
                   <!-- 收益分配 -->
-                  {{$t('products.income_distribution')}}
-                  ：</span>
-                <span>{{i.profit_distribute}}
-                  <!-- {{$t('products.day')}} -->
-                  </span>
+                  {{$t('products.income_distribution')}}：</span>
+                <span>{{i.profit_distribute}}{{$t('products.day')}}</span>
               </p>
 				      <p>
                 <span >
@@ -153,6 +150,9 @@ import '../../utils/screen'
 import { all, purchase, reivest,getConfig } from "@/api/produc";
 import { Toast } from 'mint-ui';
 import { fptproduct } from '@/utils/i18n'
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
   export default {
     data() {
       return {
@@ -242,7 +242,11 @@ import { fptproduct } from '@/utils/i18n'
         this.recharge=false;
         purchase(this.value).then(res => {
           if(res.code==200){
-            this.$message.success("购买产品成功");
+            if(lang=='en'){
+              this.$message.success("Successful product purchase");
+            }else{
+              this.$message.success("购买产品成功");
+            }
             this.$router.push({ path: "/product/record" });
           }else{
             Toast({

@@ -49,6 +49,8 @@ Vue.use(VueAxios, axios)
 Vue.use(permission)
 
 // Vue.use(ElementUI)
+// 允许携带cookie
+axios.defaults.withCredentials=true
 
 Vue.use(ElementUI, { locale })
 

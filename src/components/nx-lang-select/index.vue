@@ -15,6 +15,7 @@
 import nxSvgIcon from '@/components/nx-svg-icon/index'
 
 import {switchLang} from '@/api/login'
+import {baseUrlLang} from '@/utils/evnlang' //新增 2019.10.14
 export default {
   name: 'nx-lang-select',
   data(){
@@ -42,19 +43,13 @@ export default {
       //   message: 'switch language success',
       //   type: 'success'
       // })
-      switchLang(this.newLang).then(res=>{
-        console.log(res)
-        if(res.code==200){
+      this.axios.get(baseUrlLang+'/api/i18n?i18n_language='+this.newLang).then(res=>{
+        if(res.data.code==200){
           this.$message({
             message: 'switch language success',
             type: 'success'
           })
           this.$router.go(0)
-          setTimeout(function(){
-            // this.$router.go(0);
-            
-          },3000)
-          
         }else{
           this.$message({
             message: res.msg,
@@ -62,6 +57,22 @@ export default {
           })
         }
       })
+      // switchLang(this.newLang).then(res=>{
+      //   console.log(res)
+      //   if(res.code==200){
+      //     this.$message({
+      //       message: 'switch language success',
+      //       type: 'success'
+      //     })
+      //     this.$router.go(0)
+          
+      //   }else{
+      //     this.$message({
+      //       message: res.msg,
+      //       type: 'success'
+      //     })
+      //   }
+      // })
     }
   }
 }

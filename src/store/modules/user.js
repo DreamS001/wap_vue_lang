@@ -2,6 +2,8 @@ import { login, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { decrypt } from '@/utils/rsaEncrypt'
 
+import Cookies from 'js-cookie'
+
 const user = {
   state: {
     token: getToken(),
@@ -34,6 +36,8 @@ const user = {
       const code = userInfo.code
       const uuid = userInfo.uuid
       const rememberMe = userInfo.rememberMe
+      
+      const lang = Cookies.get('language')
       return new Promise((resolve, reject) => {
         login(username, password, code, uuid).then(res => {
           setToken(res.token, rememberMe)

@@ -261,7 +261,7 @@
 
       <div class="popup" v-if="recharge">
         <div class="popup-content">
-          <h5>公告详情</h5>
+          <h5>{{$t('navbar.news_details')}}</h5>
           <div class="close-icon" @click="closePopup"></div>
           <div class="popup-form">
             <div class="recharge-box">
@@ -280,6 +280,9 @@ import '../utils/screen'
 import {notice,foot,earn,mapp}  from "@/api/map";
 import { getUrl } from "@/api/visits";
 import { Toast } from 'mint-ui';
+
+import Cookies from 'js-cookie'
+var lang=Cookies.get('language') || 'en';
 export default {
   data(){
     return {
@@ -355,7 +358,7 @@ export default {
       },
       getUrl(){
           getUrl(9).then(res=>{
-            console.log(res)
+            // console.log(res)
             if(res.code==200){
               this.Url=res.data.url
             }else{
@@ -377,19 +380,35 @@ export default {
             //     message:'复制成功!',
             //     type:'success'
             // })
-            Toast({
-                message: '复制成功',
-                duration: 3000,
-                iconClass: 'iconfont icon-cs-cg-1'
-            });
+            if(lang=='en'){
+              Toast({
+                  message: 'copy success',
+                  duration: 3000,
+                  iconClass: 'iconfont icon-cs-cg-1'
+              });
+            }else{
+              Toast({
+                  message: '复制成功',
+                  duration: 3000,
+                  iconClass: 'iconfont icon-cs-cg-1'
+              });
+            }
         });
         clipboard.on('error', function () {
             // _this.$message.error("复制失败!")
-          Toast({
-              message: '复制失败',
-              duration: 3000,
-              iconClass: 'iconfont icon-cs-sb-1'
-          });
+          if(lang=='en'){
+            Toast({
+                message: 'copy failed',
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-sb-1'
+            });
+          }else{
+            Toast({
+                message: '复制失败',
+                duration: 3000,
+                iconClass: 'iconfont icon-cs-sb-1'
+            });
+          }
         });
       },
       //获取公告

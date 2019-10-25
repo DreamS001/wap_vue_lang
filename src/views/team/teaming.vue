@@ -247,7 +247,7 @@ export default {
     this.$nextTick(() => {
       this.init()
       // 加载数据字典
-      this.getDict('user_status')
+      // this.getDict('user_status')  //2019/10/23  17:35 注掉,国际化时接口报错
     })
     persAll().then(res => {
       console.log(res);

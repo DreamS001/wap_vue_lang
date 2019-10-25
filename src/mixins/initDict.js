@@ -7,16 +7,17 @@ export default {
     }
   },
   methods: {
-    async getDict(name) {
-      return new Promise((resolve, reject) => {
-        get(name).then(res => {
-          this.dicts = res.content
-          resolve(res)
-        }).catch(err => {
-          reject(err)
-        })
-      })
-    },
+    //2019/10/23  17:35 注掉,国际化时接口报错
+    // async getDict(name) {
+    //   return new Promise((resolve, reject) => {
+    //     get(name).then(res => {
+    //       this.dicts = res.content
+    //       resolve(res)
+    //     }).catch(err => {
+    //       reject(err)
+    //     })
+    //   })
+    // },  
     // 多个字典查询时使用逗号拼接， 如：
     // 加载多个数据字典，如何调用如下：
     // this.getDict('user_status,job_status')

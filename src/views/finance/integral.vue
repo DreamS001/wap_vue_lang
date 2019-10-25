@@ -61,7 +61,7 @@
             height="270"
              :row-class-name="setClassName"
           >
-            <el-table-column prop="date" label="日期" min-width="100" align="center"/>
+            <el-table-column prop="create_time" label="日期" min-width="100" align="center"/>
             <el-table-column prop="act_profit" label="动态钱包收益（$）" min-width="160" align="center"/>
             <el-table-column prop="sta_profit" label="静态钱包收益（$）" min-width="160" align="center"/>
             <el-table-column prop="charge_price" label="充值金额（$）" min-width="150" align="center"/>
@@ -81,6 +81,7 @@ import { Toast } from 'mint-ui';
 import { formatDate } from '../../utils/date.js'
 import { financeEarnings,financeCash } from '@/utils/i18n'// 国际化主题名字
 
+import moment from 'moment'
 import Cookies from 'js-cookie'
 var lang=Cookies.get('language') || 'en';
 export default {
@@ -182,6 +183,9 @@ export default {
       integral(this.pageNo, this.pageSize, this.beginDate, this.endDate,this.name).then(
         res => {
           if(res.code==200){
+            // res.data.list.forEach((v,i) => {
+            //   res.data.list[i].create_time = moment(res.data.list[i].create_time).format("YYYY-MM-DD hh:mm:ss");
+            // });
             this.list = this.list.concat(eval(res.data.list))
             this.total = res.data.total
           }else{

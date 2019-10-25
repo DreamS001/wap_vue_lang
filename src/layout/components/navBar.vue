@@ -25,6 +25,11 @@
 
             <div @click="userCenter" class="user-img">
                 <img :src="user.avatar">
+                <!-- <span>V{{user.level}}</span> -->
+                <span v-if="user.level==0" style="border: 1px solid #00FFFF;color:#00FFFF;">V{{user.level}}</span>
+                <span v-else-if="user.level==1" style="border: 1px solid #FEFA24;color:#FEFA24;">V{{user.level}}</span>
+                <span v-else-if="user.level==2" style="border: 1px solid #D3D4D5;color:#D3D4D5;">V{{user.level}}</span>
+                <span v-else style="border: 1px solid #D5A6F9;color:#D5A6F9;">V{{user.level}}</span>
             </div>
             <div class="user-name">
                 <!-- <span>账号</span>
@@ -99,24 +104,34 @@ export default {
             this.$store.dispatch('setLanguage', e.lang)
             if(e.lang=='zh'){
                 this.newLang='zh_CN'
+                 this.$message({
+                    message: '语言切换成功',
+                    type: 'success'
+                })
             }else{
                 this.newLang='en_US'
+                 this.$message({
+                    message: 'switch language success',
+                    type: 'success'
+                })
             }
-            this.axios.get(baseUrlLang+'/api/i18n?i18n_language='+this.newLang).then(res=>{
-                console.log(res)
-                if(res.data.code==200){
-                    this.$message({
-                        message: 'switch language success',
-                        type: 'success'
-                    })
-                    this.$router.go(0);
-                }else{
-                    this.$message({
-                        message: res.data.msg,
-                        type: 'success'
-                    })
-                }
-            })
+           
+            this.$router.go(0);
+            // this.axios.get(baseUrlLang+'/api/i18n?i18n_language='+this.newLang).then(res=>{
+            //     console.log(res)
+            //     if(res.data.code==200){
+            //         this.$message({
+            //             message: 'switch language success',
+            //             type: 'success'
+            //         })
+            //         this.$router.go(0);
+            //     }else{
+            //         this.$message({
+            //             message: res.data.msg,
+            //             type: 'success'
+            //         })
+            //     }
+            // })
             // this.axios.get('http://linf.jie360.com.cn/api/i18n?i18n_language='+this.newLang).then(res=>{
             //     console.log(res)
             //     if(res.code==200){
@@ -193,10 +208,27 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
     .right-box .user-img img{
         width: 100%;
         height: 100%;
+    }
+    .right-box .user-img span{
+        display: inline-block;
+        width:26px;
+        height:26px;
+        background:rgba(13,29,76,1);
+        border:1px solid rgba(0,255,255,1);
+        border-radius:50%;
+        line-height: 26px;
+        text-align: center;
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+        font-size: 14px;
+        color: #00FFFF;
+
     }
     .right-box .user-name{
         height: 100%;
