@@ -21,7 +21,7 @@
     "jsencrypt": "^3.0.0-rc.1",
     "lib-flexible": "^0.3.2",
     "mint-ui": "^2.2.13",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "px2rem-loader": "^0.1.9",
     "v-tap": "^3.0.3",
     "vue": "^2.5.2",
